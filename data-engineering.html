@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Engineering - Complete Learning Guide</title>
+    <link rel="stylesheet" href="data-engineering.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">📊 Data Engineering</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#extraction">Extraction</a></li>
+                <li><a href="#cleaning">Cleaning</a></li>
+                <li><a href="#formatting">Formatting</a></li>
+                <li><a href="#pipelines">Pipelines</a></li>
+                <li><a href="#quality">Quality</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-badge">🔧 Industry-Standard Data Practices</div>
+        <h1>Master <span class="gradient">Data Engineering</span></h1>
+        <p class="hero-subtitle">
+            Build production-grade data pipelines. Extract, clean, transform, and load data at scale with industry best
+            practices.
+        </p>
+
+        <div class="pipeline-icons">
+            <div class="pipeline-icon"><span>Extract</span>📥</div>
+            <span class="pipeline-arrow">→</span>
+            <div class="pipeline-icon"><span>Clean</span>🧹</div>
+            <span class="pipeline-arrow">→</span>
+            <div class="pipeline-icon"><span>Transform</span>🔄</div>
+            <span class="pipeline-arrow">→</span>
+            <div class="pipeline-icon"><span>Load</span>📤</div>
+        </div>
+    </section>
+
+    <!-- Section 1: Data Extraction -->
+    <section class="section" id="extraction">
+        <div class="section-header">
+            <span class="section-tag">Section 01</span>
+            <h2>Data <span>Extraction</span></h2>
+            <p class="section-desc">Collecting data from various sources - APIs, databases, files, and web scraping.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🌐</div>
+                <h3>API Integration</h3>
+                <p>REST, GraphQL, and webhook-based extraction.</p>
+                <ul>
+                    <li>Authentication (OAuth, API keys)</li>
+                    <li>Rate limiting & pagination</li>
+                    <li>Error handling & retries</li>
+                    <li>Schema validation</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🗄️</div>
+                <h3>Database Extraction</h3>
+                <p>SQL, NoSQL, and data warehouse sources.</p>
+                <ul>
+                    <li>Full vs incremental extraction</li>
+                    <li>Change Data Capture (CDC)</li>
+                    <li>Connection pooling</li>
+                    <li>Query optimization</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📁</div>
+                <h3>File-Based Sources</h3>
+                <p>CSV, JSON, Parquet, and binary formats.</p>
+                <ul>
+                    <li>Batch processing large files</li>
+                    <li>Schema inference</li>
+                    <li>Compression handling</li>
+                    <li>Cloud storage (S3, GCS)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Extraction Demo -->
+        <div class="pipeline-diagram">
+            <div class="pipeline-header">
+                <span class="pipeline-title">🎮 Interactive: Data Extraction Methods</span>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button class="btn btn-secondary extract-btn active" data-source="api">API</button>
+                    <button class="btn btn-secondary extract-btn" data-source="database">Database</button>
+                    <button class="btn btn-secondary extract-btn" data-source="scraping">Scraping</button>
+                    <button class="btn btn-secondary extract-btn" data-source="file">Files</button>
+                </div>
+            </div>
+            <div id="extraction-output"></div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">extraction_patterns.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> requests
+<span class="keyword">from</span> typing <span class="keyword">import</span> Iterator, Dict
+<span class="keyword">import</span> time
+
+<span class="keyword">class</span> <span class="type">APIExtractor</span>:
+    <span class="string">"""Industry-standard API extraction with best practices"""</span>
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, base_url: <span class="type">str</span>, api_key: <span class="type">str</span>):
+        self.base_url = base_url
+        self.session = requests.Session()
+        self.session.headers[<span class="string">'Authorization'</span>] = <span class="string">f'Bearer {api_key}'</span>
+    
+    <span class="keyword">def</span> <span class="function">extract_paginated</span>(self, endpoint: <span class="type">str</span>) -> <span class="type">Iterator[Dict]</span>:
+        <span class="string">"""Handle pagination automatically"""</span>
+        page = <span class="number">1</span>
+        <span class="keyword">while</span> <span class="keyword">True</span>:
+            response = self._request_with_retry(endpoint, params={<span class="string">'page'</span>: page})
+            data = response.json()
+            
+            <span class="keyword">if</span> <span class="keyword">not</span> data[<span class="string">'results'</span>]:
+                <span class="keyword">break</span>
+            
+            <span class="keyword">yield from</span> data[<span class="string">'results'</span>]
+            page += <span class="number">1</span>
+    
+    <span class="keyword">def</span> <span class="function">_request_with_retry</span>(self, endpoint, params=<span class="keyword">None</span>, retries=<span class="number">3</span>):
+        <span class="string">"""Exponential backoff for reliability"""</span>
+        <span class="keyword">for</span> attempt <span class="keyword">in</span> range(retries):
+            <span class="keyword">try</span>:
+                resp = self.session.get(<span class="string">f'{self.base_url}/{endpoint}'</span>, params=params)
+                resp.raise_for_status()
+                <span class="keyword">return</span> resp
+            <span class="keyword">except</span> requests.HTTPError <span class="keyword">as</span> e:
+                <span class="keyword">if</span> resp.status_code == <span class="number">429</span>:  <span class="comment"># Rate limited</span>
+                    time.sleep(<span class="number">2</span> ** attempt)
+                <span class="keyword">else</span>:
+                    <span class="keyword">raise</span></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Data Cleaning -->
+    <section class="section" id="cleaning">
+        <div class="section-header">
+            <span class="section-tag">Section 02</span>
+            <h2>Data <span>Cleaning</span></h2>
+            <p class="section-desc">Transform raw, messy data into clean, consistent, analysis-ready datasets.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🧹</div>
+                <h3>Missing Data</h3>
+                <p>Handle nulls, NaNs, and empty values.</p>
+                <ul>
+                    <li><strong>Drop:</strong> Remove rows/columns</li>
+                    <li><strong>Impute:</strong> Fill with mean/median/mode</li>
+                    <li><strong>Interpolate:</strong> Estimate from neighbors</li>
+                    <li><strong>Flag:</strong> Mark as missing</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>Duplicates</h3>
+                <p>Identify and handle duplicate records.</p>
+                <ul>
+                    <li>Exact duplicate detection</li>
+                    <li>Fuzzy matching (similar strings)</li>
+                    <li>Composite key deduplication</li>
+                    <li>Keep first/last/aggregate</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">✅</div>
+                <h3>Validation</h3>
+                <p>Ensure data meets quality standards.</p>
+                <ul>
+                    <li>Type checking</li>
+                    <li>Range validation</li>
+                    <li>Format verification (email, phone)</li>
+                    <li>Referential integrity</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Cleaning Demo -->
+        <div class="pipeline-diagram">
+            <div class="pipeline-header">
+                <span class="pipeline-title">🎮 Interactive: Data Cleaning Pipeline</span>
+                <button class="btn btn-primary" id="run-cleaning">Run Cleaning</button>
+            </div>
+            <div id="cleaning-output"
+                style="background: var(--bg-primary); border-radius: 8px; padding: 1.5rem; min-height: 150px;">
+                <div style="color: var(--text-muted);">Click "Run Cleaning" to see the data transformation process...
+                </div>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">data_cleaning.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="keyword">def</span> <span class="function">clean_dataset</span>(df: pd.DataFrame) -> pd.DataFrame:
+    <span class="string">"""Industry-standard data cleaning pipeline"""</span>
+    
+    <span class="comment"># 1. Remove exact duplicates</span>
+    df = df.drop_duplicates()
+    
+    <span class="comment"># 2. Handle missing values</span>
+    <span class="keyword">for</span> col <span class="keyword">in</span> df.select_dtypes(include=[np.number]).columns:
+        df[col] = df[col].fillna(df[col].median())
+    
+    <span class="keyword">for</span> col <span class="keyword">in</span> df.select_dtypes(include=[<span class="string">'object'</span>]).columns:
+        df[col] = df[col].fillna(<span class="string">'UNKNOWN'</span>)
+    
+    <span class="comment"># 3. Standardize text</span>
+    text_cols = df.select_dtypes(include=[<span class="string">'object'</span>]).columns
+    <span class="keyword">for</span> col <span class="keyword">in</span> text_cols:
+        df[col] = df[col].str.strip().str.lower()
+    
+    <span class="comment"># 4. Parse dates</span>
+    <span class="keyword">if</span> <span class="string">'created_at'</span> <span class="keyword">in</span> df.columns:
+        df[<span class="string">'created_at'</span>] = pd.to_datetime(df[<span class="string">'created_at'</span>], errors=<span class="string">'coerce'</span>)
+    
+    <span class="comment"># 5. Remove outliers (IQR method)</span>
+    <span class="keyword">for</span> col <span class="keyword">in</span> df.select_dtypes(include=[np.number]).columns:
+        Q1, Q3 = df[col].quantile([<span class="number">0.25</span>, <span class="number">0.75</span>])
+        IQR = Q3 - Q1
+        df = df[(df[col] >= Q1 - <span class="number">1.5</span>*IQR) & (df[col] <= Q3 + <span class="number">1.5</span>*IQR)]
+    
+    <span class="keyword">return</span> df</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Data Formatting -->
+    <section class="section" id="formatting">
+        <div class="section-header">
+            <span class="section-tag">Section 03</span>
+            <h2>Data <span>Formatting</span></h2>
+            <p class="section-desc">Standardize data formats for interoperability and downstream processing.</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="tab-schemas">Schemas</button>
+                <button class="tab-btn" data-tab="tab-formats">File Formats</button>
+                <button class="tab-btn" data-tab="tab-standards">Standards</button>
+            </div>
+
+            <div class="tab-panel active" id="tab-schemas">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>JSON Schema</h3>
+                        <p>Define and validate JSON structure.</p>
+                        <ul>
+                            <li>Type definitions</li>
+                            <li>Required fields</li>
+                            <li>Nested objects</li>
+                            <li>Pattern matching</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Avro / Protobuf</h3>
+                        <p>Binary serialization with schemas.</p>
+                        <ul>
+                            <li>Schema evolution</li>
+                            <li>Compact binary format</li>
+                            <li>Strong typing</li>
+                            <li>Cross-language support</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Data Contracts</h3>
+                        <p>Agreements between producers/consumers.</p>
+                        <ul>
+                            <li>SLA definitions</li>
+                            <li>Breaking change policies</li>
+                            <li>Versioning strategy</li>
+                            <li>Quality guarantees</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-formats">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Parquet</h3>
+                        <p>Columnar format for analytics.</p>
+                        <ul>
+                            <li>Excellent compression</li>
+                            <li>Predicate pushdown</li>
+                            <li>Schema embedded</li>
+                            <li>Industry standard for data lakes</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Delta Lake</h3>
+                        <p>ACID transactions on data lakes.</p>
+                        <ul>
+                            <li>Time travel (versioning)</li>
+                            <li>Merge / Upsert support</li>
+                            <li>Schema enforcement</li>
+                            <li>Audit logging</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>JSONL / NDJSON</h3>
+                        <p>Streaming-friendly JSON.</p>
+                        <ul>
+                            <li>One JSON object per line</li>
+                            <li>Easy to stream/append</li>
+                            <li>LLM training format</li>
+                            <li>Log-friendly</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-standards">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>ISO 8601</h3>
+                        <p>Date/time standardization.</p>
+                        <ul>
+                            <li>Format: YYYY-MM-DDTHH:MM:SSZ</li>
+                            <li>Timezone handling</li>
+                            <li>Unambiguous parsing</li>
+                            <li>Sortable strings</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>UTF-8 Encoding</h3>
+                        <p>Universal text encoding.</p>
+                        <ul>
+                            <li>Support all languages</li>
+                            <li>Backward compatible</li>
+                            <li>Web standard</li>
+                            <li>Always specify explicitly</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>UUIDs</h3>
+                        <p>Universal unique identifiers.</p>
+                        <ul>
+                            <li>Globally unique</li>
+                            <li>Decentralized generation</li>
+                            <li>UUIDv4 (random) or v7 (time-based)</li>
+                            <li>Database-friendly</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Data Pipelines -->
+    <section class="section" id="pipelines">
+        <div class="section-header">
+            <span class="section-tag">Section 04</span>
+            <h2>Dynamic <span>Data Pipelines</span></h2>
+            <p class="section-desc">Build auto-updating, production-grade ETL/ELT pipelines.</p>
+        </div>
+
+        <!-- Pipeline Visualization -->
+        <div class="pipeline-diagram">
+            <div class="pipeline-header">
+                <span class="pipeline-title">🎮 Interactive: ETL Pipeline Flow</span>
+                <button class="btn btn-primary" id="run-pipeline">Run Pipeline</button>
+            </div>
+            <div class="pipeline-canvas">
+                <canvas id="pipeline-canvas"></canvas>
+            </div>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">⏰</div>
+                <h3>Scheduling</h3>
+                <p>Automate pipeline execution.</p>
+                <ul>
+                    <li>Cron expressions</li>
+                    <li>Event-driven triggers</li>
+                    <li>Dependency management</li>
+                    <li>Backfill support</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔄</div>
+                <h3>Orchestration</h3>
+                <p>Coordinate complex workflows.</p>
+                <ul>
+                    <li>Apache Airflow / Dagster</li>
+                    <li>DAG-based execution</li>
+                    <li>Retry and alerting</li>
+                    <li>Monitoring dashboards</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📈</div>
+                <h3>Incremental Processing</h3>
+                <p>Process only new/changed data.</p>
+                <ul>
+                    <li>Watermarks and checkpoints</li>
+                    <li>Change Data Capture</li>
+                    <li>Merge strategies</li>
+                    <li>Deduplication at scale</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">airflow_dag.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">from</span> airflow <span class="keyword">import</span> DAG
+<span class="keyword">from</span> airflow.operators.python <span class="keyword">import</span> PythonOperator
+<span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta
+
+default_args = {
+    <span class="string">'owner'</span>: <span class="string">'data-team'</span>,
+    <span class="string">'retries'</span>: <span class="number">3</span>,
+    <span class="string">'retry_delay'</span>: timedelta(minutes=<span class="number">5</span>),
+    <span class="string">'email_on_failure'</span>: <span class="keyword">True</span>,
+}
+
+<span class="keyword">with</span> DAG(
+    dag_id=<span class="string">'daily_user_pipeline'</span>,
+    default_args=default_args,
+    schedule_interval=<span class="string">'0 6 * * *'</span>,  <span class="comment"># Daily at 6 AM</span>
+    start_date=datetime(<span class="number">2024</span>, <span class="number">1</span>, <span class="number">1</span>),
+    catchup=<span class="keyword">False</span>,
+) <span class="keyword">as</span> dag:
+    
+    extract = PythonOperator(
+        task_id=<span class="string">'extract_users'</span>,
+        python_callable=extract_from_api,
+    )
+    
+    clean = PythonOperator(
+        task_id=<span class="string">'clean_data'</span>,
+        python_callable=clean_dataset,
+    )
+    
+    load = PythonOperator(
+        task_id=<span class="string">'load_to_warehouse'</span>,
+        python_callable=load_to_bigquery,
+    )
+    
+    <span class="comment"># Define dependencies</span>
+    extract >> clean >> load</pre>
+            </div>
+        </div>
+
+        <div class="source-box">
+            <h4>📖 Learning Resources</h4>
+            <ul>
+                <li><a href="https://airflow.apache.org/docs/" target="_blank">Apache Airflow Documentation</a></li>
+                <li><a href="https://docs.dagster.io/" target="_blank">Dagster - Modern Data Orchestration</a></li>
+                <li><a href="https://docs.getdbt.com/" target="_blank">dbt - Transform Data in Your Warehouse</a></li>
+                <li><a href="https://delta.io/" target="_blank">Delta Lake - ACID Data Lakes</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 5: Data Quality -->
+    <section class="section" id="quality">
+        <div class="section-header">
+            <span class="section-tag">Section 05</span>
+            <h2>Data <span>Quality</span></h2>
+            <p class="section-desc">Monitor, measure, and maintain data quality at scale.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Quality Dimensions</h3>
+                <p>Key metrics for data quality.</p>
+                <ul>
+                    <li><strong>Completeness:</strong> % non-null values</li>
+                    <li><strong>Accuracy:</strong> Correctness of data</li>
+                    <li><strong>Consistency:</strong> Cross-source agreement</li>
+                    <li><strong>Freshness:</strong> Data recency</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔍</div>
+                <h3>Monitoring</h3>
+                <p>Continuous quality checks.</p>
+                <ul>
+                    <li>Great Expectations</li>
+                    <li>Anomaly detection</li>
+                    <li>Schema drift alerts</li>
+                    <li>Volume monitoring</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>Data Observability</h3>
+                <p>Full visibility into data health.</p>
+                <ul>
+                    <li>Lineage tracking</li>
+                    <li>Impact analysis</li>
+                    <li>Root cause diagnosis</li>
+                    <li>Monte Carlo, Datadog</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Quality Checker -->
+        <div class="pipeline-diagram">
+            <div class="pipeline-header">
+                <span class="pipeline-title">🎮 Interactive: Data Quality Check</span>
+                <button class="btn btn-primary" id="check-quality">Run Quality Check</button>
+            </div>
+            <div id="quality-result" style="min-height: 200px;">
+                <div style="color: var(--text-muted);">Click "Run Quality Check" to analyze your data...</div>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">data_quality.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> great_expectations <span class="keyword">as</span> ge
+
+<span class="comment"># Load data as Great Expectations DataFrame</span>
+df = ge.read_csv(<span class="string">"users.csv"</span>)
+
+<span class="comment"># Define expectations (data quality rules)</span>
+df.expect_column_to_exist(<span class="string">"user_id"</span>)
+df.expect_column_values_to_be_unique(<span class="string">"user_id"</span>)
+df.expect_column_values_to_not_be_null(<span class="string">"email"</span>)
+df.expect_column_values_to_match_regex(
+    <span class="string">"email"</span>, 
+    <span class="string">r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"</span>
+)
+df.expect_column_values_to_be_between(<span class="string">"age"</span>, min_value=<span class="number">0</span>, max_value=<span class="number">120</span>)
+
+<span class="comment"># Validate and get results</span>
+results = df.validate()
+
+<span class="keyword">if</span> results[<span class="string">"success"</span>]:
+    <span class="keyword">print</span>(<span class="string">"✅ All quality checks passed!"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"❌ Quality issues found:"</span>)
+    <span class="keyword">for</span> result <span class="keyword">in</span> results[<span class="string">"results"</span>]:
+        <span class="keyword">if</span> <span class="keyword">not</span> result[<span class="string">"success"</span>]:
+            <span class="keyword">print</span>(<span class="string">f"  - {result['expectation_config']['expectation_type']}"</span>)</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Path -->
+    <section class="section" id="roadmap">
+        <div class="section-header">
+            <span class="section-tag">🎯 Learning Path</span>
+            <h2>Your Data Engineering <span>Journey</span></h2>
+        </div>
+
+        <div class="learning-path">
+            <div class="path-line"></div>
+
+            <div class="path-item">
+                <div class="path-marker">1</div>
+                <div class="path-content">
+                    <h4>Week 1-2: Python & SQL Foundations</h4>
+                    <p>Pandas, SQL queries, database basics, file handling.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">2</div>
+                <div class="path-content">
+                    <h4>Week 3-4: Data Extraction</h4>
+                    <p>APIs, web scraping, database connectors, cloud storage.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">3</div>
+                <div class="path-content">
+                    <h4>Week 5-6: Cleaning & Transformation</h4>
+                    <p>Data cleaning patterns, dbt, data modeling.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">4</div>
+                <div class="path-content">
+                    <h4>Week 7-8: Pipeline Orchestration</h4>
+                    <p>Airflow, Dagster, scheduling, monitoring.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">5</div>
+                <div class="path-content">
+                    <h4>Week 9+: Production & Scale</h4>
+                    <p>Data quality, observability, streaming, cloud platforms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Built with 🧡 for data engineers | Transform messy data into gold</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">
+            "Data is the new oil, but like oil, it's valuable only when refined." - Clive Humby
+        </p>
+    </footer>
+
+    <script src="data-engineering.js"></script>
+
+</body>
+
+</html>

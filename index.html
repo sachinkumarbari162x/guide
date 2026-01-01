@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building LLMs from Scratch - Complete Learning Guide</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation Timeline -->
+<nav class="nav-timeline">
+  <a href="#hero" class="nav-dot active" data-label="Start"></a>
+  <a href="#math" class="nav-dot" data-label="Mathematics"></a>
+  <a href="#ml-basics" class="nav-dot" data-label="ML Basics"></a>
+  <a href="#neural" class="nav-dot" data-label="Neural Networks"></a>
+  <a href="#transformer" class="nav-dot" data-label="Transformers"></a>
+  <a href="#training" class="nav-dot" data-label="Training"></a>
+  <a href="#scaling" class="nav-dot" data-label="Scaling"></a>
+  <a href="#advanced" class="nav-dot" data-label="Advanced"></a>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+  <div class="hero-badge">🚀 Complete Learning Roadmap</div>
+  <h1>Building LLMs<br>From Scratch</h1>
+  <p class="hero-subtitle">A comprehensive journey from mathematical foundations to state-of-the-art language model development. Master every concept needed to build, train, and deploy production-ready LLMs.</p>
+  <div class="hero-cta">
+    <a href="#math" class="btn btn-primary">Start Learning →</a>
+    <a href="#transformer" class="btn btn-secondary">Jump to Transformers</a>
+  </div>
+</section>
+
+<!-- Section 1: Mathematics -->
+<section class="section" id="math">
+  <div class="section-header">
+    <span class="section-number">SECTION 01</span>
+    <h2>Mathematical Foundations</h2>
+    <p class="section-desc">The essential mathematics that powers every aspect of neural networks and language models.</p>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">📐</div>
+      <h3>Linear Algebra</h3>
+      <p>The backbone of neural networks - transforming and manipulating high-dimensional data.</p>
+      <ul>
+        <li>Vectors & Matrices operations</li>
+        <li>Matrix multiplication (core of NNs)</li>
+        <li>Eigenvalues & Eigenvectors</li>
+        <li>Singular Value Decomposition (SVD)</li>
+        <li>Tensor operations for batch processing</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">∫</div>
+      <h3>Calculus</h3>
+      <p>Understanding how models learn through optimization and gradient-based methods.</p>
+      <ul>
+        <li>Derivatives & Partial derivatives</li>
+        <li>Chain rule (Backpropagation!)</li>
+        <li>Gradients & Gradient descent</li>
+        <li>Jacobians & Hessians</li>
+        <li>Automatic differentiation</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3>Probability & Statistics</h3>
+      <p>Language models are fundamentally probability distributions over sequences.</p>
+      <ul>
+        <li>Probability distributions</li>
+        <li>Bayes' theorem</li>
+        <li>Maximum Likelihood Estimation</li>
+        <li>Cross-entropy & KL divergence</li>
+        <li>Sampling methods</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Matrix Multiplication - The Core Operation</div>
+    <div class="formula">C = A × B where C[i,j] = Σₖ A[i,k] × B[k,j]</div>
+    <p style="color: var(--text-secondary); margin-top: 1rem;">Every neural network layer performs matrix multiplication millions of times per forward pass.</p>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-dot red"></span>
+      <span class="code-dot yellow"></span>
+      <span class="code-dot green"></span>
+      <span class="code-title">linear_algebra_fundamentals.py</span>
+    </div>
+    <div class="code-content">
+<pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="comment"># Vectors - Basic building blocks</span>
+embedding = np.array([<span class="number">0.2</span>, <span class="number">-0.5</span>, <span class="number">0.8</span>, <span class="number">0.1</span>])  <span class="comment"># Word embedding (4D)</span>
+
+<span class="comment"># Matrix multiplication - Core of neural networks</span>
+<span class="keyword">def</span> <span class="function">linear_layer</span>(x, W, b):
+    <span class="string">"""y = Wx + b - The fundamental neural network operation"""</span>
+    <span class="keyword">return</span> np.dot(W, x) + b
+
+<span class="comment"># Attention uses: Q @ K.T / sqrt(d_k) @ V</span>
+<span class="keyword">def</span> <span class="function">scaled_dot_product</span>(Q, K, V):
+    d_k = Q.shape[-<span class="number">1</span>]
+    scores = np.dot(Q, K.T) / np.sqrt(d_k)
+    attention = softmax(scores)
+    <span class="keyword">return</span> np.dot(attention, V)
+
+<span class="comment"># Softmax - Converting scores to probabilities</span>
+<span class="keyword">def</span> <span class="function">softmax</span>(x):
+    exp_x = np.exp(x - np.max(x))  <span class="comment"># Numerical stability</span>
+    <span class="keyword">return</span> exp_x / exp_x.sum()</pre>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h4>💡 Key Insight</h4>
+    <p>Understanding that a neural network is just a series of matrix multiplications with non-linearities is the foundation. Every complex operation (attention, convolution, normalization) reduces to linear algebra.</p>
+  </div>
+</section>
+
+<!-- Section 2: ML Basics -->
+<section class="section" id="ml-basics">
+  <div class="section-header">
+    <span class="section-number">SECTION 02</span>
+    <h2>Machine Learning Fundamentals</h2>
+    <p class="section-desc">Core concepts that every ML practitioner must master before diving into deep learning.</p>
+  </div>
+
+  <div class="diagram-container">
+    <div class="ascii-diagram">
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     MACHINE LEARNING PARADIGMS                          │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│   ┌──────────────────┐    ┌──────────────────┐    ┌─────────────────┐  │
+│   │   SUPERVISED     │    │   UNSUPERVISED   │    │  REINFORCEMENT  │  │
+│   │    LEARNING      │    │    LEARNING      │    │    LEARNING     │  │
+│   ├──────────────────┤    ├──────────────────┤    ├─────────────────┤  │
+│   │ • Classification │    │ • Clustering     │    │ • Policy        │  │
+│   │ • Regression     │    │ • Dimensionality │    │ • Reward        │  │
+│   │ • Labeled Data   │    │   Reduction      │    │ • Environment   │  │
+│   └──────────────────┘    └──────────────────┘    └─────────────────┘  │
+│           │                       │                       │             │
+│           └───────────────────────┼───────────────────────┘             │
+│                                   ▼                                     │
+│                    ┌──────────────────────────┐                         │
+│                    │   LLMs USE ALL THREE!    │                         │
+│                    │  Pre-train → Fine-tune   │                         │
+│                    │       → RLHF             │                         │
+│                    └──────────────────────────┘                         │
+└─────────────────────────────────────────────────────────────────────────┘</div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h3>Loss Functions</h3>
+      <p>How we measure model performance and guide learning.</p>
+      <ul>
+        <li><strong>Cross-Entropy Loss</strong> - Standard for classification & LLMs</li>
+        <li><strong>MSE</strong> - Regression tasks</li>
+        <li><strong>Perplexity</strong> - Language model evaluation</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Optimization</h3>
+      <p>Algorithms that minimize loss and train models effectively.</p>
+      <ul>
+        <li><strong>SGD</strong> - The classic optimizer</li>
+        <li><strong>Adam</strong> - Adaptive moments (most popular)</li>
+        <li><strong>AdamW</strong> - Adam with weight decay</li>
+        <li><strong>Learning Rate Schedules</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Cross-Entropy Loss - The LLM Training Objective</div>
+    <div class="formula">L = -Σᵢ yᵢ log(ŷᵢ) = -log P(correct_token)</div>
+    <p style="color: var(--text-secondary); margin-top: 1rem;">Minimizing cross-entropy = Maximizing probability of correct next token</p>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-dot red"></span>
+      <span class="code-dot yellow"></span>
+      <span class="code-dot green"></span>
+      <span class="code-title">optimization_basics.py</span>
+    </div>
+    <div class="code-content">
+<pre><span class="keyword">import</span> torch
+<span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+
+<span class="comment"># Cross-entropy loss for language modeling</span>
+criterion = nn.CrossEntropyLoss()
+
+<span class="comment"># Adam optimizer with weight decay (AdamW)</span>
+optimizer = torch.optim.AdamW(
+    model.parameters(),
+    lr=<span class="number">3e-4</span>,           <span class="comment"># Learning rate</span>
+    betas=(<span class="number">0.9</span>, <span class="number">0.999</span>), <span class="comment"># Momentum terms</span>
+    weight_decay=<span class="number">0.01</span>  <span class="comment"># Regularization</span>
+)
+
+<span class="comment"># Training loop skeleton</span>
+<span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):
+    <span class="keyword">for</span> batch <span class="keyword">in</span> dataloader:
+        optimizer.zero_grad()           <span class="comment"># Clear gradients</span>
+        outputs = model(batch.input)    <span class="comment"># Forward pass</span>
+        loss = criterion(outputs, batch.target)
+        loss.backward()                 <span class="comment"># Backpropagation</span>
+        torch.nn.utils.clip_grad_norm_(model.parameters(), <span class="number">1.0</span>)
+        optimizer.step()                <span class="comment"># Update weights</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- Section 3: Neural Networks -->
+<section class="section" id="neural">
+  <div class="section-header">
+    <span class="section-number">SECTION 03</span>
+    <h2>Neural Network Architecture</h2>
+    <p class="section-desc">From perceptrons to deep networks - building blocks that make LLMs possible.</p>
+  </div>
+
+  <div class="diagram-container">
+    <div class="ascii-diagram">
+                        NEURAL NETWORK FORWARD PASS
+    
+    Input Layer          Hidden Layers           Output Layer
+    ───────────         ─────────────           ────────────
+    
+        ○─────────┬─────────○──────┬──────────○
+       x₁        │         h₁     │          y₁
+                 │                │
+        ○────────┼─────────○──────┼──────────○
+       x₂        │         h₂     │          y₂
+                 │                │
+        ○────────┴─────────○──────┴──────────○
+       x₃                  h₃                y₃
+    
+    ──────────────────────────────────────────────────────────
+    
+    y = σ(W₃ · σ(W₂ · σ(W₁ · x + b₁) + b₂) + b₃)
+    
+    Where σ = activation function (ReLU, GELU, etc.)</div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Activation Functions</h3>
+      <ul>
+        <li><strong>ReLU:</strong> max(0, x) - Simple, effective</li>
+        <li><strong>GELU:</strong> x·Φ(x) - Used in transformers</li>
+        <li><strong>SiLU/Swish:</strong> x·σ(x) - Smooth ReLU</li>
+        <li><strong>Softmax:</strong> Probability distribution</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔄</div>
+      <h3>Normalization</h3>
+      <ul>
+        <li><strong>Layer Norm:</strong> Standard for transformers</li>
+        <li><strong>RMSNorm:</strong> Faster, used in LLaMA</li>
+        <li><strong>Batch Norm:</strong> For CNNs, less common in LLMs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <h3>Regularization</h3>
+      <ul>
+        <li><strong>Dropout:</strong> Random neuron deactivation</li>
+        <li><strong>Weight Decay:</strong> L2 regularization</li>
+        <li><strong>Gradient Clipping:</strong> Prevent explosions</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-dot red"></span>
+      <span class="code-dot yellow"></span>
+      <span class="code-dot green"></span>
+      <span class="code-title">neural_network_from_scratch.py</span>
+    </div>
+    <div class="code-content">
+<pre><span class="keyword">import</span> torch
+<span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+
+<span class="keyword">class</span> <span class="class">FeedForwardNetwork</span>(nn.Module):
+    <span class="string">"""MLP block used in every Transformer layer"""</span>
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, d_model, d_ff, dropout=<span class="number">0.1</span>):
+        <span class="keyword">super</span>().__init__()
+        <span class="comment"># Expand → Activate → Contract pattern</span>
+        self.w1 = nn.Linear(d_model, d_ff)      <span class="comment"># Expand 4x</span>
+        self.w2 = nn.Linear(d_ff, d_model)      <span class="comment"># Contract back</span>
+        self.dropout = nn.Dropout(dropout)
+        self.activation = nn.GELU()              <span class="comment"># Modern choice</span>
+    
+    <span class="keyword">def</span> <span class="function">forward</span>(self, x):
+        <span class="comment"># x: (batch, seq_len, d_model)</span>
+        x = self.w1(x)              <span class="comment"># → (batch, seq_len, d_ff)</span>
+        x = self.activation(x)      <span class="comment"># Non-linearity</span>
+        x = self.dropout(x)
+        x = self.w2(x)              <span class="comment"># → (batch, seq_len, d_model)</span>
+        <span class="keyword">return</span> x
+
+<span class="comment"># Common dimensions in LLMs:</span>
+<span class="comment"># GPT-2 Small:  d_model=768,  d_ff=3072  (4x expansion)</span>
+<span class="comment"># GPT-3 175B:   d_model=12288, d_ff=49152</span>
+<span class="comment"># LLaMA 70B:    d_model=8192,  d_ff=28672</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- Section 4: Transformers -->
+<section class="section" id="transformer">
+  <div class="section-header">
+    <span class="section-number">SECTION 04</span>
+    <h2>The Transformer Architecture</h2>
+    <p class="section-desc">The revolutionary architecture that powers GPT, LLaMA, Claude, and every modern LLM.</p>
+  </div>
+
+  <div class="diagram-container">
+    <div class="ascii-diagram">
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                    TRANSFORMER DECODER BLOCK (GPT-style)                  ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║                                                                           ║
+║  Input Embeddings ──────────────────────────────────────────────────────┐ ║
+║         │                                                               │ ║
+║         │  ┌─────────────────────────────────────────────────────────┐ │ ║
+║         └─►│              TRANSFORMER BLOCK (Nx)                     │ │ ║
+║            │  ┌───────────────────────────────────────────────────┐  │ │ ║
+║  ┌────────►│  │           Layer Normalization                     │  │ │ ║
+║  │         │  └───────────────────────────────────────────────────┘  │ │ ║
+║  │         │                      │                                  │ │ ║
+║  │         │  ┌───────────────────▼───────────────────────────────┐  │ │ ║
+║  │Residual │  │         MASKED SELF-ATTENTION                     │  │ │ ║
+║  │         │  │   Q = XWq    K = XWk    V = XWv                   │  │ │ ║
+║  │         │  │   Attention = softmax(QK^T / √d_k) × V            │  │ │ ║
+║  │         │  └───────────────────────────────────────────────────┘  │ │ ║
+║  │         │                      │                                  │ │ ║
+║  ├─────────│──────────────────────┼──────────────────────(+)────────►│ │ ║
+║  │         │  ┌───────────────────▼───────────────────────────────┐  │ │ ║
+║  │         │  │           Layer Normalization                     │  │ │ ║
+║  │         │  └───────────────────────────────────────────────────┘  │ │ ║
+║  │         │                      │                                  │ │ ║
+║  │         │  ┌───────────────────▼───────────────────────────────┐  │ │ ║
+║  │         │  │            FEED-FORWARD NETWORK                   │  │ │ ║
+║  │         │  │        Linear → GELU → Linear                     │  │ │ ║
+║  │         │  └───────────────────────────────────────────────────┘  │ │ ║
+║  │         │                      │                                  │ │ ║
+║  └─────────│──────────────────────┼──────────────────────(+)────────►│ │ ║
+║            └──────────────────────┼──────────────────────────────────┘ │ ║
+║                                   │                                    │ ║
+║                    ┌──────────────▼──────────────┐                     │ ║
+║                    │   Final Layer Norm           │                     ║
+║                    │   → Linear (vocab_size)      │                     ║
+║                    │   → Softmax → Probabilities  │                     ║
+║                    └─────────────────────────────┘                     ║
+╚═══════════════════════════════════════════════════════════════════════════╝</div>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Self-Attention - The Core Innovation</div>
+    <div class="formula">Attention(Q, K, V) = softmax(QK<sup>T</sup> / √d<sub>k</sub>) × V</div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-dot red"></span>
+      <span class="code-dot yellow"></span>
+      <span class="code-dot green"></span>
+      <span class="code-title">attention_mechanism.py</span>
+    </div>
+    <div class="code-content">
+<pre><span class="keyword">import</span> torch
+<span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+<span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F
+<span class="keyword">import</span> math
+
+<span class="keyword">class</span> <span class="class">MultiHeadAttention</span>(nn.Module):
+    <span class="string">"""Multi-Head Self-Attention as used in GPT models"""</span>
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, d_model, n_heads, dropout=<span class="number">0.1</span>):
+        <span class="keyword">super</span>().__init__()
+        <span class="keyword">assert</span> d_model % n_heads == <span class="number">0</span>
+        
+        self.d_model = d_model
+        self.n_heads = n_heads
+        self.d_k = d_model // n_heads
+        
+        <span class="comment"># Query, Key, Value projections</span>
+        self.W_q = nn.Linear(d_model, d_model)
+        self.W_k = nn.Linear(d_model, d_model)
+        self.W_v = nn.Linear(d_model, d_model)
+        self.W_o = nn.Linear(d_model, d_model)
+        
+        self.dropout = nn.Dropout(dropout)
+    
+    <span class="keyword">def</span> <span class="function">forward</span>(self, x, mask=<span class="keyword">None</span>):
+        batch_size, seq_len, _ = x.shape
+        
+        <span class="comment"># Project to Q, K, V</span>
+        Q = self.W_q(x)  <span class="comment"># (batch, seq, d_model)</span>
+        K = self.W_k(x)
+        V = self.W_v(x)
+        
+        <span class="comment"># Reshape for multi-head attention</span>
+        Q = Q.view(batch_size, seq_len, self.n_heads, self.d_k).transpose(<span class="number">1</span>, <span class="number">2</span>)
+        K = K.view(batch_size, seq_len, self.n_heads, self.d_k).transpose(<span class="number">1</span>, <span class="number">2</span>)
+        V = V.view(batch_size, seq_len, self.n_heads, self.d_k).transpose(<span class="number">1</span>, <span class="number">2</span>)
+        <span class="comment"># Now: (batch, n_heads, seq_len, d_k)</span>
+        
+        <span class="comment"># Scaled dot-product attention</span>
+        scores = torch.matmul(Q, K.transpose(-<span class="number">2</span>, -<span class="number">1</span>)) / math.sqrt(self.d_k)
+        
+        <span class="comment"># Causal mask for autoregressive generation</span>
+        <span class="keyword">if</span> mask <span class="keyword">is not None</span>:
+            scores = scores.masked_fill(mask == <span class="number">0</span>, float(<span class="string">'-inf'</span>))
+        
+        attn_weights = F.softmax(scores, dim=-<span class="number">1</span>)
+        attn_weights = self.dropout(attn_weights)
+        
+        <span class="comment"># Apply attention to values</span>
+        context = torch.matmul(attn_weights, V)
+        
+        <span class="comment"># Reshape back</span>
+        context = context.transpose(<span class="number">1</span>, <span class="number">2</span>).contiguous().view(batch_size, seq_len, self.d_model)
+        
+        <span class="keyword">return</span> self.W_o(context)</pre>
+    </div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <h3>Positional Encoding</h3>
+      <p>Transformers have no inherent notion of order. We add position information:</p>
+      <ul>
+        <li><strong>Sinusoidal</strong> - Original Transformer</li>
+        <li><strong>Learned</strong> - GPT-2 style</li>
+        <li><strong>RoPE</strong> - Rotary Position Embeddings (LLaMA)</li>
+        <li><strong>ALiBi</strong> - Attention with Linear Biases</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔢</div>
+      <h3>Tokenization</h3>
+      <p>Converting text to numbers the model can process:</p>
+      <ul>
+        <li><strong>BPE</strong> - Byte Pair Encoding (GPT)</li>
+        <li><strong>WordPiece</strong> - BERT style</li>
+        <li><strong>SentencePiece</strong> - Language agnostic</li>
+        <li><strong>Tiktoken</strong> - OpenAI's fast tokenizer</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Training -->
+<section class="section" id="training">
+  <div class="section-header">
+    <span class="section-number">SECTION 05</span>
+    <h2>Training Large Language Models</h2>
+    <p class="section-desc">The complete training pipeline from data preparation to model deployment.</p>
+  </div>
+
+  <div class="diagram-container">
+    <div class="ascii-diagram">
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                        LLM TRAINING PIPELINE                                 ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  ┌────────────┐    ┌────────────┐    ┌────────────┐    ┌────────────┐       ║
+║  │   RAW      │───►│   CLEAN    │───►│  TOKENIZE  │───►│   BATCH    │       ║
+║  │   DATA     │    │   & FILTER │    │   & PACK   │    │   & LOAD   │       ║
+║  │            │    │            │    │            │    │            │       ║
+║  │  Web crawl │    │ Dedup      │    │ BPE/SPM    │    │ Shuffle    │       ║
+║  │  Books     │    │ Filter     │    │ + Concat   │    │ GPU Ready  │       ║
+║  │  Code      │    │ Quality    │    │            │    │            │       ║
+║  └────────────┘    └────────────┘    └────────────┘    └────────────┘       ║
+║                                                              │               ║
+║                                                              ▼               ║
+║  ┌───────────────────────────────────────────────────────────────────────┐  ║
+║  │                      TRAINING LOOP                                     │  ║
+║  │  ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐            │  ║
+║  │  │ Forward │───►│  Loss   │───►│Backward │───►│ Update  │            │  ║
+║  │  │  Pass   │    │ Compute │    │  Pass   │    │ Weights │            │  ║
+║  │  └─────────┘    └─────────┘    └─────────┘    └─────────┘            │  ║
+║  └───────────────────────────────────────────────────────────────────────┘  ║
+║                                   │                                          ║
+║                                   ▼                                          ║
+║  ┌────────────┐    ┌────────────┐    ┌────────────┐    ┌────────────┐       ║
+║  │  PRE-     │───►│  FINE-     │───►│   RLHF /   │───►│  DEPLOY    │       ║
+║  │  TRAINED  │    │  TUNING    │    │   DPO      │    │  & SERVE   │       ║
+║  │  MODEL    │    │  (SFT)     │    │            │    │            │       ║
+║  └────────────┘    └────────────┘    └────────────┘    └────────────┘       ║
+╚══════════════════════════════════════════════════════════════════════════════╝</div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">💾</div>
+      <h3>Training Data</h3>
+      <ul>
+        <li><strong>CommonCrawl</strong> - Web-scale text</li>
+        <li><strong>The Pile</strong> - 800GB diverse dataset</li>
+        <li><strong>RedPajama</strong> - Open reproduction</li>
+        <li><strong>Books, Wikipedia, Code</strong></li>
+        <li>Data quality > Data quantity</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚙️</div>
+      <h3>Hyperparameters</h3>
+      <ul>
+        <li><strong>Learning Rate:</strong> 1e-4 to 3e-4</li>
+        <li><strong>Batch Size:</strong> Millions of tokens</li>
+        <li><strong>Warmup:</strong> 1-2% of training</li>
+        <li><strong>Weight Decay:</strong> 0.01 - 0.1</li>
+        <li><strong>Gradient Clipping:</strong> 1.0</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">📈</div>
+      <h3>Monitoring</h3>
+      <ul>
+        <li><strong>Training Loss</strong> curve</li>
+        <li><strong>Validation Perplexity</strong></li>
+        <li><strong>Gradient Norms</strong></li>
+        <li><strong>Learning Rate</strong> schedule</li>
+        <li><strong>Eval Benchmarks</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-dot red"></span>
+      <span class="code-dot yellow"></span>
+      <span class="code-dot green"></span>
+      <span class="code-title">training_loop.py</span>
+    </div>
+    <div class="code-content">
+<pre><span class="keyword">import</span> torch
+<span class="keyword">from</span> torch.cuda.amp <span class="keyword">import</span> autocast, GradScaler
+
+<span class="keyword">def</span> <span class="function">train_llm</span>(model, dataloader, optimizer, scheduler, config):
+    model.train()
+    scaler = GradScaler()  <span class="comment"># Mixed precision training</span>
+    
+    <span class="keyword">for</span> step, batch <span class="keyword">in</span> enumerate(dataloader):
+        input_ids = batch[<span class="string">'input_ids'</span>].cuda()
+        labels = batch[<span class="string">'labels'</span>].cuda()
+        
+        <span class="comment"># Mixed precision forward pass</span>
+        <span class="keyword">with</span> autocast():
+            outputs = model(input_ids)
+            logits = outputs.logits
+            
+            <span class="comment"># Shift for next-token prediction</span>
+            shift_logits = logits[..., :-<span class="number">1</span>, :].contiguous()
+            shift_labels = labels[..., <span class="number">1</span>:].contiguous()
+            
+            loss = F.cross_entropy(
+                shift_logits.view(-<span class="number">1</span>, shift_logits.size(-<span class="number">1</span>)),
+                shift_labels.view(-<span class="number">1</span>)
+            )
+        
+        <span class="comment"># Gradient accumulation</span>
+        loss = loss / config.gradient_accumulation_steps
+        scaler.scale(loss).backward()
+        
+        <span class="keyword">if</span> (step + <span class="number">1</span>) % config.gradient_accumulation_steps == <span class="number">0</span>:
+            scaler.unscale_(optimizer)
+            torch.nn.utils.clip_grad_norm_(model.parameters(), <span class="number">1.0</span>)
+            scaler.step(optimizer)
+            scaler.update()
+            scheduler.step()
+            optimizer.zero_grad()
+        
+        <span class="keyword">if</span> step % <span class="number">100</span> == <span class="number">0</span>:
+            print(<span class="string">f"Step {step}, Loss: {loss.item():.4f}"</span>)</pre>
+    </div>
+  </div>
+</section>
+
+<!-- Section 6: Scaling -->
+<section class="section" id="scaling">
+  <div class="section-header">
+    <span class="section-number">SECTION 06</span>
+    <h2>Scaling & Distributed Training</h2>
+    <p class="section-desc">Training billion-parameter models across thousands of GPUs.</p>
+  </div>
+
+  <div class="comparison-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Parameters</th>
+          <th>Training Compute</th>
+          <th>GPUs Used</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>GPT-2</td><td>1.5B</td><td>~40 petaflop-days</td><td>256 V100s</td></tr>
+        <tr><td>GPT-3</td><td>175B</td><td>~3,640 petaflop-days</td><td>10,000+ V100s</td></tr>
+        <tr><td>LLaMA 2 70B</td><td>70B</td><td>~1,720,320 GPU-hours</td><td>2,000 A100s</td></tr>
+        <tr><td>GPT-4</td><td>~1.8T (estimated)</td><td>Unknown</td><td>25,000+ A100s</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🔀</div>
+      <h3>Data Parallelism (DP)</h3>
+      <p>Same model on each GPU, different data batches.</p>
+      <ul>
+        <li>Simple to implement</li>
+        <li>Limited by model size fitting in GPU memory</li>
+        <li>Gradient synchronization overhead</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3>Tensor Parallelism (TP)</h3>
+      <p>Split individual layers across GPUs.</p>
+      <ul>
+        <li>Megatron-LM style</li>
+        <li>Column/Row split attention & FFN</li>
+        <li>Requires high-bandwidth interconnect</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">📚</div>
+      <h3>Pipeline Parallelism (PP)</h3>
+      <p>Different layers on different GPUs.</p>
+      <ul>
+        <li>GPipe, PipeDream</li>
+        <li>Micro-batching for efficiency</li>
+        <li>Bubble overhead</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="diagram-container">
+    <div class="ascii-diagram">
+                      SCALING LAWS (Chinchilla Optimal)
+    
+    Loss ∝ N^(-0.076) × D^(-0.095)
+    
+    Where:  N = Number of parameters
+            D = Dataset size (tokens)
+    
+    ═══════════════════════════════════════════════════════════════════
+    
+    OPTIMAL RATIO:  20 tokens per parameter
+    
+    ┌──────────────┬────────────────┬───────────────────┐
+    │   Model      │   Parameters   │   Optimal Tokens  │
+    ├──────────────┼────────────────┼───────────────────┤
+    │   1B         │   1 billion    │   20 billion      │
+    │   7B         │   7 billion    │   140 billion     │
+    │   70B        │   70 billion   │   1.4 trillion    │
+    └──────────────┴────────────────┴───────────────────┘</div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-dot red"></span>
+      <span class="code-dot yellow"></span>
+      <span class="code-dot green"></span>
+      <span class="code-title">distributed_training.py</span>
+    </div>
+    <div class="code-content">
+<pre><span class="keyword">import</span> torch.distributed <span class="keyword">as</span> dist
+<span class="keyword">from</span> torch.nn.parallel <span class="keyword">import</span> DistributedDataParallel <span class="keyword">as</span> DDP
+<span class="keyword">from</span> deepspeed <span class="keyword">import</span> initialize <span class="keyword">as</span> deepspeed_init
+
+<span class="comment"># Method 1: PyTorch DDP (Data Parallel)</span>
+dist.init_process_group(backend=<span class="string">'nccl'</span>)
+model = DDP(model.cuda(), device_ids=[local_rank])
+
+<span class="comment"># Method 2: DeepSpeed ZeRO (Memory Efficient)</span>
+model, optimizer, _, _ = deepspeed_init(
+    model=model,
+    config={
+        <span class="string">"zero_optimization"</span>: {
+            <span class="string">"stage"</span>: <span class="number">3</span>,  <span class="comment"># Full sharding</span>
+            <span class="string">"offload_optimizer"</span>: {<span class="string">"device"</span>: <span class="string">"cpu"</span>}
+        },
+        <span class="string">"fp16"</span>: {<span class="string">"enabled"</span>: <span class="keyword">True</span>},
+        <span class="string">"gradient_accumulation_steps"</span>: <span class="number">16</span>
+    }
+)
+
+<span class="comment"># Method 3: FSDP (Fully Sharded Data Parallel)</span>
+<span class="keyword">from</span> torch.distributed.fsdp <span class="keyword">import</span> FullyShardedDataParallel <span class="keyword">as</span> FSDP
+model = FSDP(model, sharding_strategy=ShardingStrategy.FULL_SHARD)</pre>
+    </div>
+  </div>
+</section>
+
+<!-- Section 7: Advanced -->
+<section class="section" id="advanced">
+  <div class="section-header">
+    <span class="section-number">SECTION 07</span>
+    <h2>Advanced Techniques & RLHF</h2>
+    <p class="section-desc">State-of-the-art methods for alignment, efficiency, and capability enhancement.</p>
+  </div>
+
+  <div class="diagram-container">
+    <div class="ascii-diagram">
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                      RLHF TRAINING PIPELINE                                  ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  PHASE 1: SFT                PHASE 2: REWARD MODEL        PHASE 3: PPO      ║
+║  ───────────                 ──────────────────           ───────────       ║
+║                                                                              ║
+║  ┌─────────────┐            ┌─────────────────┐         ┌───────────────┐   ║
+║  │ Pre-trained │            │ Human Rankings  │         │ Policy Model  │   ║
+║  │   Model     │            │   (A > B > C)   │         │  (SFT Model)  │   ║
+║  └──────┬──────┘            └────────┬────────┘         └───────┬───────┘   ║
+║         │                            │                          │           ║
+║         ▼                            ▼                          ▼           ║
+║  ┌─────────────┐            ┌─────────────────┐         ┌───────────────┐   ║
+║  │ Fine-tune   │            │ Train Reward    │         │ Generate      │   ║
+║  │ on Human    │            │ Model to Score  │         │ Response      │   ║
+║  │ Demos       │            │ Responses       │         │               │   ║
+║  └──────┬──────┘            └────────┬────────┘         └───────┬───────┘   ║
+║         │                            │                          │           ║
+║         ▼                            ▼                          ▼           ║
+║  ┌─────────────┐            ┌─────────────────┐         ┌───────────────┐   ║
+║  │ SFT Model   │───────────►│ Reward Model    │────────►│ PPO Update    │   ║
+║  │             │            │     r(x, y)     │         │ with KL Pen   │   ║
+║  └─────────────┘            └─────────────────┘         └───────────────┘   ║
+╚══════════════════════════════════════════════════════════════════════════════╝</div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h3>DPO (Direct Preference Optimization)</h3>
+      <p>Simpler alternative to RLHF - no reward model needed!</p>
+      <ul>
+        <li>Train directly on preference pairs</li>
+        <li>More stable than PPO</li>
+        <li>Used in LLaMA 2, Zephyr</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧊</div>
+      <h3>Quantization</h3>
+      <p>Reduce model size with minimal quality loss.</p>
+      <ul>
+        <li><strong>INT8</strong> - 2x compression</li>
+        <li><strong>INT4</strong> - 4x compression</li>
+        <li><strong>GPTQ, AWQ, GGML</strong></li>
+        <li><strong>QLoRA</strong> - Quantized LoRA</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔧</div>
+      <h3>LoRA (Low-Rank Adaptation)</h3>
+      <p>Efficient fine-tuning with minimal parameters.</p>
+      <ul>
+        <li>Freeze base model</li>
+        <li>Train low-rank adapters</li>
+        <li>0.1% of parameters</li>
+        <li>Merge for inference</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-dot red"></span>
+      <span class="code-dot yellow"></span>
+      <span class="code-dot green"></span>
+      <span class="code-title">lora_fine_tuning.py</span>
+    </div>
+    <div class="code-content">
+<pre><span class="keyword">from</span> peft <span class="keyword">import</span> LoraConfig, get_peft_model, TaskType
+
+<span class="comment"># LoRA Configuration</span>
+lora_config = LoraConfig(
+    task_type=TaskType.CAUSAL_LM,
+    r=<span class="number">16</span>,                     <span class="comment"># Rank of update matrices</span>
+    lora_alpha=<span class="number">32</span>,             <span class="comment"># Scaling factor</span>
+    lora_dropout=<span class="number">0.1</span>,
+    target_modules=[          <span class="comment"># Which layers to adapt</span>
+        <span class="string">"q_proj"</span>, <span class="string">"v_proj"</span>,    <span class="comment"># Attention</span>
+        <span class="string">"k_proj"</span>, <span class="string">"o_proj"</span>,
+        <span class="string">"gate_proj"</span>,            <span class="comment"># FFN (LLaMA style)</span>
+        <span class="string">"up_proj"</span>, <span class="string">"down_proj"</span>
+    ]
+)
+
+<span class="comment"># Apply LoRA to model</span>
+model = get_peft_model(base_model, lora_config)
+model.print_trainable_parameters()
+<span class="comment"># Output: trainable params: 4,194,304 || all params: 6,742,609,920</span>
+<span class="comment"># trainable%: 0.0622</span></pre>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h4>🚀 Cutting-Edge Techniques (2024)</h4>
+    <p><strong>Flash Attention 2</strong> - 2-4x faster attention with IO-awareness<br>
+    <strong>Mixture of Experts (MoE)</strong> - Sparse activation for efficiency (Mixtral)<br>
+    <strong>Speculative Decoding</strong> - Use small model to speed up generation<br>
+    <strong>Grouped Query Attention (GQA)</strong> - Efficient KV cache sharing<br>
+    <strong>Sliding Window Attention</strong> - Long context without quadratic cost</p>
+  </div>
+</section>
+
+<!-- Summary Section -->
+<section class="section" id="summary">
+  <div class="section-header">
+    <span class="section-number">SUMMARY</span>
+    <h2>The Complete LLM Building Roadmap</h2>
+  </div>
+
+  <div class="skill-tree">
+    <div class="skill-level">
+      <div class="skill-badge">1</div>
+      <div class="skill-content">
+        <h4>Foundations (4-8 weeks)</h4>
+        <p>Linear algebra, Calculus, Probability, Python, NumPy, PyTorch basics</p>
+        <div class="skill-bar"><div class="skill-progress" style="width: 100%"></div></div>
+      </div>
+    </div>
+    <div class="skill-level">
+      <div class="skill-badge">2</div>
+      <div class="skill-content">
+        <h4>Deep Learning (4-6 weeks)</h4>
+        <p>Neural networks, Backpropagation, RNNs, CNNs, Optimization</p>
+        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+      </div>
+    </div>
+    <div class="skill-level">
+      <div class="skill-badge">3</div>
+      <div class="skill-content">
+        <h4>Transformers (3-4 weeks)</h4>
+        <p>Attention mechanism, Positional encoding, GPT architecture, Tokenization</p>
+        <div class="skill-bar"><div class="skill-progress" style="width: 70%"></div></div>
+      </div>
+    </div>
+    <div class="skill-level">
+      <div class="skill-badge">4</div>
+      <div class="skill-content">
+        <h4>Training & Scaling (4-6 weeks)</h4>
+        <p>Distributed training, Mixed precision, Data pipelines, Hyperparameter tuning</p>
+        <div class="skill-bar"><div class="skill-progress" style="width: 55%"></div></div>
+      </div>
+    </div>
+    <div class="skill-level">
+      <div class="skill-badge">5</div>
+      <div class="skill-content">
+        <h4>Advanced & Alignment (Ongoing)</h4>
+        <p>RLHF, DPO, LoRA, Quantization, Flash Attention, MoE, Deployment</p>
+        <div class="skill-bar"><div class="skill-progress" style="width: 40%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="warning-box">
+    <h4>⚠️ Remember</h4>
+    <p>Building production LLMs requires: massive compute (thousands of GPUs), huge datasets (trillions of tokens), and months of training. Start with smaller models (100M-1B parameters) to learn the fundamentals!</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>Built with 💜 for the AI/ML community | Master the art of building LLMs</p>
+  <p style="margin-top: 1rem; font-size: 0.8rem;">Inspired by GPT, LLaMA, Claude, and the open-source AI research community</p>
+</footer>
+
+<script>
+// Navigation highlighting
+const navDots = document.querySelectorAll('.nav-dot');
+const sections = document.querySelectorAll('.section, .hero');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 200;
+    if (scrollY >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+  
+  navDots.forEach(dot => {
+    dot.classList.remove('active');
+    if (dot.getAttribute('href') === '#' + current) {
+      dot.classList.add('active');
+    }
+  });
+});
+
+// Smooth scroll
+navDots.forEach(dot => {
+  dot.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(dot.getAttribute('href'));
+    target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Animate skill bars on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const progressBars = entry.target.querySelectorAll('.skill-progress');
+      progressBars.forEach(bar => {
+        bar.style.width = bar.style.width;
+      });
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.skill-tree').forEach(tree => observer.observe(tree));
+</script>
+
+</body>
+</html>

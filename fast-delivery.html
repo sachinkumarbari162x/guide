@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Delivery & Optimization - Complete Learning Guide</title>
+    <link rel="stylesheet" href="fast-delivery.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">⚡ FastDelivery</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#data">Data Delivery</a></li>
+                <li><a href="#browser">Browser Internals</a></li>
+                <li><a href="#mobile">Mobile Optimization</a></li>
+                <li><a href="#standards">Standards</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">🚀 Performance Engineering</div>
+        <h1>High-Performance <br> <span>Delivery & Optimization</span></h1>
+        <p>Master the art of delivering bits to pixels faster. Learn CDNs, browser rendering pipelines, and mobile-first optimization strategies.</p>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">53%</div>
+                <div class="stat-label">Users leave if load time > 3s</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">HTTP/3</div>
+                <div class="stat-label">Modern Protocol Standard</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">60fps</div>
+                <div class="stat-label">Target Frame Rate</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Data Delivery -->
+    <section class="section" id="data">
+        <h2 class="section-title">Data Delivery Infrastructure</h2>
+        <p class="section-subtitle">How data travels from server to client with speed and reliability.</p>
+
+        <div class="cards-container">
+            <div class="info-card">
+                <div class="card-icon">🌐</div>
+                <h3>CDNs & Edge Computing</h3>
+                <p>Content Delivery Networks cache content geographically closer to users. Edge computing runs logic at these nodes.</p>
+                <ul class="tech-list">
+                    <li><span>Latency</span> <span>&lt; 50ms</span></li>
+                    <li><span>Caching</span> <span>Global</span></li>
+                    <li><span>Logic</span> <span>Serverless</span></li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <div class="card-icon">📡</div>
+                <h3>Protocols (HTTP/2 & 3)</h3>
+                <p>Modern transport protocols reduce blocking and overhead.</p>
+                <ul class="tech-list">
+                    <li><span>Multiplexing</span> <span>Enable</span></li>
+                    <li><span>Header Compression</span> <span>HPACK/QPACK</span></li>
+                    <li><span>Transport</span> <span>QUIC (UDP)</span></li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <div class="card-icon">📦</div>
+                <h3>Compression & Formats</h3>
+                <p>Smaller files mean faster downloads. Use modern algorithms.</p>
+                <ul class="tech-list">
+                    <li><span>Text</span> <span>Brotli / Gzip</span></li>
+                    <li><span>Images</span> <span>AVIF / WebP</span></li>
+                    <li><span>Video</span> <span>H.265 / VP9</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Demo: Latency Simulator -->
+        <div class="demo-container">
+            <div class="demo-header">
+                <span class="demo-title">🎮 Interactive: Latency Simulator</span>
+            </div>
+            <div class="network-controls">
+                <div class="control-group">
+                    <label>Network Distance (ms)</label>
+                    <input type="range" id="latencyRange" min="10" max="500" value="100">
+                    <div id="latencyValue" style="color: var(--accent-cyan); font-weight: bold;">100 ms</div>
+                </div>
+                <div class="control-group">
+                    <label>Protocol Efficiency</label>
+                    <select id="protocolSelect" style="width: 100%; padding: 0.5rem; background: var(--bg-card); color: white; border: 1px solid var(--border-light); border-radius: 4px;">
+                        <option value="1">HTTP/1.1 (Waterfall)</option>
+                        <option value="2">HTTP/2 (Multiplexed)</option>
+                        <option value="3">HTTP/3 (QUIC)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="simulation-visual">
+                <div class="server">🖥️</div>
+                <div class="packet" id="demoPacket"></div>
+                <div class="client">📱</div>
+            </div>
+            <div style="margin-top: 1rem; text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+                Visualizing packet travel time. Higher latency = cleaner animation delay.
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Browser Internals -->
+    <section class="section" id="browser">
+        <h2 class="section-title">Browser Internals</h2>
+        <p class="section-subtitle">Understanding the Critical Rendering Path (CRP) to optimize paint times.</p>
+
+        <!-- Visual Pipeline -->
+        <div class="pipeline-steps">
+            <div class="step" data-step="1">
+                <span class="step-icon">📄</span>
+                <span class="step-label">HTML Parsing</span>
+            </div>
+            <div class="step" data-step="2">
+                <span class="step-icon">🌳</span>
+                <span class="step-label">DOM Tree</span>
+            </div>
+            <div class="step" data-step="3">
+                <span class="step-icon">🎨</span>
+                <span class="step-label">CSSOM</span>
+            </div>
+            <div class="step">
+                <span class="step-icon">📐</span>
+                <span class="step-label">Layout</span>
+            </div>
+            <div class="step">
+                <span class="step-icon">🖌️</span>
+                <span class="step-label">Paint</span>
+            </div>
+            <div class="step">
+                <span class="step-icon">🍱</span>
+                <span class="step-label">Composite</span>
+            </div>
+        </div>
+        
+        <div class="pipeline-info" id="pipelineInfo">
+            <h4>Critical Rendering Path</h4>
+            <p>Hover over steps above to see details. The browser parses HTML to build DOM, CSS to build CSSOM, combines them into a Render Tree, calculates Layout, Paints pixels, and Composites layers.</p>
+        </div>
+
+        <div style="margin-top: 2rem;">
+            <h3>Optimization Snippets</h3>
+            <div class="code-block">
+<span class="comment">// 1. Defer non-critical JS</span>
+&lt;script src="analytics.js" <span class="keyword">defer</span>&gt;&lt;/script&gt;
+
+<span class="comment">// 2. Preload critical assets</span>
+&lt;link rel="preload" href="hero-image.jpg" as="image"&gt;
+
+<span class="comment">// 3. Use CSS `content-visibility` to skip offscreen rendering</span>
+.section {
+    <span class="keyword">content-visibility</span>: auto;
+    <span class="keyword">contain-intrinsic-size</span>: 1000px;
+}
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Mobile Optimization -->
+    <section class="section" id="mobile">
+        <h2 class="section-title">Mobile Optimization</h2>
+        <p class="section-subtitle">Specific strategies for Android, iOS, and constrained environments.</p>
+
+        <div class="cards-container">
+            <div class="info-card" style="border-color: rgba(0, 255, 157, 0.3);">
+                <div class="card-icon" style="color: #00ff9d;">🤖</div>
+                <h3>Android Internals</h3>
+                <p>Optimizing for the Android Runtime (ART) and diverse hardware.</p>
+                <ul class="tech-list">
+                    <li><span>Startup</span> <span>Baseline Profiles</span></li>
+                    <li><span>Rendering</span> <span>Avoid Overdraw</span></li>
+                    <li><span>Memory</span> <span>Bitmap Recycling</span></li>
+                </ul>
+            </div>
+            <div class="info-card" style="border-color: rgba(0, 102, 255, 0.3);">
+                <div class="card-icon" style="color: #0066ff;">🍎</div>
+                <h3>iOS Internals</h3>
+                <p>Leveraging WebKit and hardware acceleration on Apple silicon.</p>
+                <ul class="tech-list">
+                    <li><span>Graphics</span> <span>Metal API</span></li>
+                    <li><span>JavaScript</span> <span>JIT Compilation</span></li>
+                    <li><span>Battery</span> <span>Energy Modes</span></li>
+                </ul>
+            </div>
+            <div class="info-card" style="border-color: rgba(255, 238, 0, 0.3);">
+                <div class="card-icon" style="color: #ffee00;">⚡</div>
+                <h3>PWA & Capabilities</h3>
+                <p>Bringing native power to the web on all platforms.</p>
+                <ul class="tech-list">
+                    <li><span>Offline</span> <span>Service Workers</span></li>
+                    <li><span>Storage</span> <span>IndexedDB</span></li>
+                    <li><span>Install</span> <span>Manifest.json</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Industry Standards -->
+    <section class="section" id="standards">
+        <h2 class="section-title">Industry Standards</h2>
+        <p class="section-subtitle">Metrics and benchmarks used by top tech companies.</p>
+
+        <div class="cards-container">
+            <div class="info-card">
+                <h3>Core Web Vitals</h3>
+                <p>Google's official ranking factors for UX.</p>
+                <div style="margin-top: 1rem;">
+                    <div style="margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
+                        <span>LCP (Loading)</span>
+                        <span style="color: var(--accent-green);">&lt; 2.5s</span>
+                    </div>
+                    <div style="width: 100%; background: #333; height: 6px; border-radius: 3px;">
+                        <div style="width: 70%; background: var(--accent-green); height: 100%; border-radius: 3px;"></div>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <div style="margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
+                        <span>INP (Interact)</span>
+                        <span style="color: var(--accent-green);">&lt; 200ms</span>
+                    </div>
+                    <div style="width: 100%; background: #333; height: 6px; border-radius: 3px;">
+                        <div style="width: 80%; background: var(--accent-green); height: 100%; border-radius: 3px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-card">
+                <h3>Performance Budgets</h3>
+                <p>Setting strict limits on file sizes to prevent regression.</p>
+                <ul class="tech-list">
+                    <li><span>JS Bundle</span> <span>Max 170KB (gz)</span></li>
+                    <li><span>Initial CSS</span> <span>Max 10KB</span></li>
+                    <li><span>Total Image</span> <span>Max 500KB</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 4rem; color: var(--text-muted); border-top: 1px solid var(--border-light); margin-top: 4rem;">
+        <p>Built for Speed. Optimized for Learning.</p>
+    </footer>
+
+    <script src="fast-delivery.js"></script>
+</body>
+</html>

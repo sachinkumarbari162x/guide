@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLMs for 3D Generation - Complete Learning Guide</title>
+    <link rel="stylesheet" href="llm-3d-models.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">🌌 3D-LLM</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#text-to-3d">Text-to-3D</a></li>
+                <li><a href="#nerf">NeRFs</a></li>
+                <li><a href="#gaussian">Gaussians</a></li>
+                <li><a href="#terrain">Landscapes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-content">
+            <h1>Generate <span>3D Worlds</span> with AI</h1>
+            <p>Learn how Large Language Models and Diffusion Models are enabling the creation of 3D objects,
+                environments, and entire landscapes from text prompts.</p>
+        </div>
+    </section>
+
+    <!-- Section 1: Text-to-3D -->
+    <section class="section" id="text-to-3d">
+        <div class="section-header">
+            <span class="section-icon">💬</span>
+            <h2 class="section-title">Text-to-3D Pipelines</h2>
+        </div>
+        <p class="section-subtitle">How do we go from a text prompt like "a golden dragon statue" to an actual 3D mesh?
+        </p>
+
+        <div class="grid-cards">
+            <div class="holo-card">
+                <h3>CLIP: The Bridge</h3>
+                <p><strong>Contrastive Language-Image Pre-training</strong> learns joint representations of text and
+                    images. By aligning text embeddings with visual features, CLIP enables models to understand what
+                    "looks like" a prompt.</p>
+                <p style="color: var(--holo-purple);">Key Insight: CLIP provides the "semantic compass" that guides 3D
+                    optimization.</p>
+            </div>
+            <div class="holo-card">
+                <h3>Score Distillation Sampling (SDS)</h3>
+                <p>Introduced in <strong>DreamFusion</strong>, SDS uses a pre-trained 2D diffusion model to provide
+                    gradients for optimizing a 3D representation (NeRF). The 3D model is rendered from random views, and
+                    the diffusion model "scores" how well the render matches the text prompt.</p>
+                <div class="code-sample">
+                    <span class="comment">// Simplified SDS Loss Concept</span>
+                    L_SDS = E[ w(t) * (noise_pred - noise_target) * dNeRF/dθ ]
+                </div>
+            </div>
+            <div class="holo-card">
+                <h3>Key Research Papers</h3>
+                <ul style="list-style: none; color: var(--text-dim);">
+                    <li>📄 <strong>DreamFusion</strong> (Google, 2022)</li>
+                    <li>📄 <strong>Magic3D</strong> (NVIDIA, 2022)</li>
+                    <li>📄 <strong>Shap-E</strong> (OpenAI, 2023)</li>
+                    <li>📄 <strong>Point-E</strong> (OpenAI, 2022)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resource-box">
+            <h4>📖 Learning Resources</h4>
+            <ul>
+                <li><a href="https://dreamfusion3d.github.io/" target="_blank">DreamFusion Project Page</a></li>
+                <li><a href="https://research.nvidia.com/labs/dir/magic3d/" target="_blank">Magic3D by NVIDIA</a></li>
+                <li><a href="https://openai.com/research/shap-e" target="_blank">Shap-E by OpenAI</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 2: NeRFs -->
+    <section class="section" id="nerf">
+        <div class="section-header">
+            <span class="section-icon">🔮</span>
+            <h2 class="section-title">Neural Radiance Fields (NeRFs)</h2>
+        </div>
+        <p class="section-subtitle">Representing a scene as a continuous volumetric function learned by a neural
+            network.</p>
+
+        <div class="grid-cards">
+            <div class="holo-card">
+                <h3>Core Concept</h3>
+                <p>A NeRF is a Multi-Layer Perceptron (MLP) that takes a 5D input: <strong>3D position (x, y,
+                        z)</strong> and <strong>2D viewing direction (θ, φ)</strong>. It outputs the <strong>RGB
+                        color</strong> and <strong>volume density (σ)</strong> at that point.</p>
+                <div class="code-sample">
+                    F(x, y, z, θ, φ) → (R, G, B, σ)
+                </div>
+            </div>
+            <div class="holo-card">
+                <h3>Volume Rendering</h3>
+                <p>Rays are cast from the camera. Points are sampled along each ray. For each point, the NeRF predicts
+                    color and density. The final pixel color is computed by accumulating these samples weighted by their
+                    transmittance.</p>
+                <p style="color: var(--holo-pink);">C(r) = ∫ T(t) σ(r(t)) c(r(t), d) dt</p>
+            </div>
+            <div class="holo-card">
+                <h3>Training NeRFs</h3>
+                <p>NeRFs are trained on a sparse set of 2D images with known camera poses. The loss is photometric:
+                    rendered images must match ground truth images.</p>
+                <p style="color: var(--holo-cyan);">Loss = MSE(Rendered Image, Ground Truth)</p>
+            </div>
+        </div>
+
+        <div class="resource-box">
+            <h4>📖 Learning Resources</h4>
+            <ul>
+                <li><a href="https://www.matthewtancik.com/nerf" target="_blank">Original NeRF Paper (Mildenhall et
+                        al.)</a></li>
+                <li><a href="https://github.com/bmild/nerf" target="_blank">NeRF PyTorch Implementation</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 3: 3D Gaussian Splatting -->
+    <section class="section" id="gaussian">
+        <div class="section-header">
+            <span class="section-icon">✨</span>
+            <h2 class="section-title">3D Gaussian Splatting</h2>
+        </div>
+        <p class="section-subtitle">An explicit, real-time renderable alternative to NeRFs.</p>
+
+        <div class="grid-cards">
+            <div class="holo-card">
+                <h3>What is a 3D Gaussian?</h3>
+                <p>Instead of an implicit MLP, a scene is represented by millions of explicit 3D Gaussians. Each
+                    Gaussian has a <strong>position</strong>, <strong>covariance matrix</strong> (shape/orientation),
+                    <strong>color (SH coeffs)</strong>, and <strong>opacity</strong>.</p>
+            </div>
+            <div class="holo-card">
+                <h3>Rasterization (Splatting)</h3>
+                <p>3D Gaussians are projected onto the 2D image plane and "splatted". This is differentiable and
+                    extremely fast, enabling <strong>real-time rendering at 100+ FPS</strong>.</p>
+            </div>
+            <div class="holo-card">
+                <h3>Advantages Over NeRFs</h3>
+                <ul style="list-style: none; color: var(--text-dim);">
+                    <li>✅ Real-time rendering</li>
+                    <li>✅ Explicit representation (editable)</li>
+                    <li>✅ Faster training</li>
+                    <li>⚠️ Higher memory usage</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resource-box">
+            <h4>📖 Learning Resources</h4>
+            <ul>
+                <li><a href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/" target="_blank">3D Gaussian
+                        Splatting Paper (SIGGRAPH 2023)</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 4: Terrain/Landscape Generation -->
+    <section class="section" id="terrain">
+        <div class="section-header">
+            <span class="section-icon">🏔️</span>
+            <h2 class="section-title">Landscape & Terrain Generation</h2>
+        </div>
+        <p class="section-subtitle">From procedural noise to AI-driven world building.</p>
+
+        <div class="grid-cards">
+            <div class="holo-card">
+                <h3>Procedural Methods</h3>
+                <p><strong>Perlin Noise</strong> and <strong>Fractal Brownian Motion (fBM)</strong> have been the
+                    backbone of terrain generation for decades. They create natural-looking, infinitely tileable
+                    heightmaps.</p>
+                <div class="code-sample">
+                    <span class="comment">// Fractal Brownian Motion</span>
+                    <span class="keyword">float</span> <span class="function">fbm</span>(vec2 p) {
+                    <span class="keyword">float</span> value = <span class="number">0.0</span>;
+                    <span class="keyword">float</span> amplitude = <span class="number">0.5</span>;
+                    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i
+                    <<span class="number">6</span>; i++) {
+                        value += amplitude * noise(p);
+                        p *= <span class="number">2.0</span>;
+                        amplitude *= <span class="number">0.5</span>;
+                        }
+                        <span class="keyword">return</span> value;
+                        }
+                </div>
+            </div>
+            <div class="holo-card">
+                <h3>Learning-Based Terrain</h3>
+                <p><strong>GANs</strong> can be trained on real-world DEM (Digital Elevation Model) data to generate
+                    photorealistic terrain heightmaps. <strong>NeRFs</strong> can capture entire natural scenes.</p>
+            </div>
+            <div class="holo-card">
+                <h3>LLM-Driven World Building</h3>
+                <p>Emerging research uses LLMs to describe scenes which are then synthesized by diffusion/NeRF
+                    pipelines. Imagine prompting: "A vast desert with ancient ruins and a setting sun".</p>
+            </div>
+        </div>
+
+        <!-- Interactive Demo -->
+        <div class="demo-container">
+            <div class="demo-header">
+                <span class="demo-title">🎮 Interactive: Procedural Terrain Generator</span>
+                <div class="controls">
+                    <div class="control-group">
+                        <label>Amplitude</label>
+                        <input type="range" id="amplitude" min="1" max="10" value="5">
+                    </div>
+                    <div class="control-group">
+                        <label>Frequency</label>
+                        <input type="range" id="frequency" min="1" max="10" value="3">
+                    </div>
+                    <div class="control-group">
+                        <label>Octaves</label>
+                        <input type="range" id="octaves" min="1" max="8" value="4">
+                    </div>
+                </div>
+            </div>
+            <canvas id="terrainCanvas"></canvas>
+        </div>
+
+        <div class="resource-box">
+            <h4>📖 Learning Resources</h4>
+            <ul>
+                <li><a href="https://mrl.cs.nyu.edu/~perlin/noise/" target="_blank">Ken Perlin's Original Noise Page</a>
+                </li>
+                <li><a href="https://thebookofshaders.com/13/" target="_blank">The Book of Shaders: fBM</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>From Text to 3D. The future of content creation.</p>
+    </footer>
+
+    <script src="llm-3d-models.js"></script>
+</body>
+
+</html>

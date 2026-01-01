@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Algebra - Complete Learning Guide</title>
+    <link rel="stylesheet" href="linear-algebra.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">📐 Linear Algebra Guide</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#vectors">Vectors</a></li>
+                <li><a href="#matrices">Matrices</a></li>
+                <li><a href="#transformations">Transformations</a></li>
+                <li><a href="#eigen">Eigenvalues</a></li>
+                <li><a href="#applications">Applications</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-badge">📚 From Basics to Machine Learning</div>
+        <h1>Master <span class="gradient">Linear Algebra</span></h1>
+        <p class="hero-subtitle">
+            The mathematical foundation of machine learning, computer graphics, and data science.
+            Learn through interactive visualizations and build intuition for vectors, matrices, and transformations.
+        </p>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-value">6</div>
+                <div class="info-label">Core Concepts</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value">4</div>
+                <div class="info-label">Interactive Demos</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value">∞</div>
+                <div class="info-label">Applications</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Vectors -->
+    <section class="section" id="vectors">
+        <div class="section-header">
+            <span class="section-tag">📍 Section 01</span>
+            <h2>Vectors - <span>The Building Blocks</span></h2>
+            <p class="section-desc">Vectors are ordered lists of numbers that represent magnitude and direction in
+                space.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📍</div>
+                <h3>What is a Vector?</h3>
+                <p>A vector is a mathematical object with both magnitude (length) and direction.</p>
+                <ul>
+                    <li><strong>Geometrically:</strong> An arrow pointing from origin to a point</li>
+                    <li><strong>Algebraically:</strong> An ordered list of numbers [x, y, z, ...]</li>
+                    <li><strong>In ML:</strong> Feature representation of data points</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">➕</div>
+                <h3>Vector Operations</h3>
+                <p>Core operations that form the basis of linear algebra.</p>
+                <ul>
+                    <li><strong>Addition:</strong> a + b = [a₁+b₁, a₂+b₂]</li>
+                    <li><strong>Scalar Mult:</strong> c·a = [c·a₁, c·a₂]</li>
+                    <li><strong>Dot Product:</strong> a·b = a₁b₁ + a₂b₂</li>
+                    <li><strong>Cross Product:</strong> a × b (3D only)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📏</div>
+                <h3>Vector Properties</h3>
+                <p>Important characteristics of vectors.</p>
+                <ul>
+                    <li><strong>Magnitude:</strong> ||v|| = √(v₁² + v₂² + ...)</li>
+                    <li><strong>Unit Vector:</strong> v̂ = v / ||v||</li>
+                    <li><strong>Angle:</strong> cos(θ) = (a·b)/(||a|| ||b||)</li>
+                    <li><strong>Orthogonal:</strong> a·b = 0</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Vector Visualization -->
+        <div class="canvas-container">
+            <div class="canvas-header">
+                <span class="canvas-title">🎮 Interactive: Vector Addition</span>
+                <div class="canvas-controls">
+                    <button class="btn btn-primary" id="toggle-sum">Hide Sum</button>
+                </div>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="vector-canvas"></canvas>
+            </div>
+            <div class="slider-group">
+                <div class="slider-item">
+                    <span class="slider-label">Vector a (x):</span>
+                    <input type="range" id="vec-a-x" min="-5" max="5" step="0.5" value="3">
+                    <span class="slider-value" id="vec-a-x-val">3.0</span>
+                </div>
+                <div class="slider-item">
+                    <span class="slider-label">Vector a (y):</span>
+                    <input type="range" id="vec-a-y" min="-5" max="5" step="0.5" value="2">
+                    <span class="slider-value" id="vec-a-y-val">2.0</span>
+                </div>
+                <div class="slider-item">
+                    <span class="slider-label">Vector b (x):</span>
+                    <input type="range" id="vec-b-x" min="-5" max="5" step="0.5" value="1">
+                    <span class="slider-value" id="vec-b-x-val">1.0</span>
+                </div>
+                <div class="slider-item">
+                    <span class="slider-label">Vector b (y):</span>
+                    <input type="range" id="vec-b-y" min="-5" max="5" step="0.5" value="3">
+                    <span class="slider-value" id="vec-b-y-val">3.0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="math-box">
+            <div class="math-label">The Dot Product Formula</div>
+            <div class="math-formula">
+                a · b = ||a|| ||b|| cos(θ) = Σ aᵢbᵢ
+            </div>
+            <p class="math-note">The dot product measures how much two vectors point in the same direction. It's
+                fundamental to projections, similarity measures, and neural networks.</p>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">vectors.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="comment"># Creating vectors</span>
+a = np.array([<span class="number">3</span>, <span class="number">4</span>])
+b = np.array([<span class="number">1</span>, <span class="number">2</span>])
+
+<span class="comment"># Vector operations</span>
+addition = a + b             <span class="comment"># [4, 6]</span>
+scalar_mult = <span class="number">2</span> * a          <span class="comment"># [6, 8]</span>
+dot_product = np.dot(a, b)   <span class="comment"># 3*1 + 4*2 = 11</span>
+
+<span class="comment"># Magnitude (L2 norm)</span>
+magnitude = np.linalg.norm(a)  <span class="comment"># √(9+16) = 5</span>
+
+<span class="comment"># Unit vector (direction only)</span>
+unit_vector = a / np.linalg.norm(a)  <span class="comment"># [0.6, 0.8]</span>
+
+<span class="comment"># Angle between vectors</span>
+cos_theta = np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+angle_rad = np.arccos(cos_theta)
+angle_deg = np.degrees(angle_rad)  <span class="comment"># ≈ 10.3°</span>
+
+<span class="comment"># Check orthogonality</span>
+<span class="keyword">def</span> <span class="function">are_orthogonal</span>(v1, v2):
+    <span class="keyword">return</span> np.isclose(np.dot(v1, v2), <span class="number">0</span>)</pre>
+            </div>
+        </div>
+
+        <div class="source-box">
+            <h4>📖 Learning Resources</h4>
+            <ul>
+                <li><a href="https://www.3blue1brown.com/topics/linear-algebra" target="_blank">3Blue1Brown - Essence of
+                        Linear Algebra</a> (Visual intuition)</li>
+                <li><a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/" target="_blank">MIT OCW
+                        18.06 - Linear Algebra</a> (Gilbert Strang)</li>
+                <li><a href="https://www.khanacademy.org/math/linear-algebra" target="_blank">Khan Academy - Linear
+                        Algebra</a> (Step-by-step)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 2: Matrices -->
+    <section class="section" id="matrices">
+        <div class="section-header">
+            <span class="section-tag">📊 Section 02</span>
+            <h2>Matrices - <span>Organized Data & Transformations</span></h2>
+            <p class="section-desc">Matrices are 2D arrays of numbers that represent linear transformations and data.
+            </p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>What is a Matrix?</h3>
+                <p>A rectangular array of numbers arranged in rows and columns.</p>
+                <ul>
+                    <li><strong>Notation:</strong> A ∈ ℝᵐˣⁿ (m rows, n columns)</li>
+                    <li><strong>Element:</strong> Aᵢⱼ = element at row i, column j</li>
+                    <li><strong>Vector view:</strong> Collection of column/row vectors</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">✖️</div>
+                <h3>Matrix Multiplication</h3>
+                <p>The core operation - rows × columns.</p>
+                <ul>
+                    <li><strong>Rule:</strong> (m×n) × (n×p) = (m×p)</li>
+                    <li><strong>Not commutative:</strong> AB ≠ BA</li>
+                    <li><strong>Associative:</strong> (AB)C = A(BC)</li>
+                    <li><strong>Distributive:</strong> A(B+C) = AB + AC</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔄</div>
+                <h3>Special Matrices</h3>
+                <p>Important matrix types in linear algebra.</p>
+                <ul>
+                    <li><strong>Identity:</strong> I (Ax = x)</li>
+                    <li><strong>Diagonal:</strong> Only diagonal non-zero</li>
+                    <li><strong>Symmetric:</strong> A = Aᵀ</li>
+                    <li><strong>Orthogonal:</strong> AᵀA = I</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Matrix Multiplication -->
+        <div class="canvas-container">
+            <div class="canvas-header">
+                <span class="canvas-title">🎮 Interactive: Matrix Multiplication</span>
+                <div class="canvas-controls">
+                    <button class="btn btn-secondary" id="matrix-step">Next Step</button>
+                    <button class="btn btn-primary" id="matrix-random">Randomize</button>
+                </div>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="matrix-canvas"></canvas>
+            </div>
+        </div>
+
+        <div class="math-box">
+            <div class="math-label">Matrix Multiplication Formula</div>
+            <div class="math-formula">
+                Cᵢⱼ = Σₖ Aᵢₖ × Bₖⱼ
+            </div>
+            <p class="math-note">Each element C[i,j] is the dot product of row i from A and column j from B. This is the
+                foundation of neural network forward passes.</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="tab-operations">Operations</button>
+                <button class="tab-btn" data-tab="tab-inverse">Inverse</button>
+                <button class="tab-btn" data-tab="tab-determinant">Determinant</button>
+                <button class="tab-btn" data-tab="tab-rank">Rank</button>
+            </div>
+
+            <div class="tab-panel active" id="tab-operations">
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                        <span class="code-title">matrix_operations.py</span>
+                    </div>
+                    <div class="code-body">
+                        <pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+A = np.array([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]])
+B = np.array([[<span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>]])
+
+<span class="comment"># Basic operations</span>
+C = A + B        <span class="comment"># Element-wise addition</span>
+D = A * B        <span class="comment"># Element-wise (Hadamard) product</span>
+E = A @ B        <span class="comment"># Matrix multiplication (preferred)</span>
+E = np.dot(A, B) <span class="comment"># Same as above</span>
+
+<span class="comment"># Transpose</span>
+A_T = A.T        <span class="comment"># [[1,3], [2,4]]</span>
+
+<span class="comment"># Shape and dimensions</span>
+<span class="keyword">print</span>(A.shape)   <span class="comment"># (2, 2)</span>
+<span class="keyword">print</span>(A.ndim)    <span class="comment"># 2</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-inverse">
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                        <span class="code-title">matrix_inverse.py</span>
+                    </div>
+                    <div class="code-body">
+                        <pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+A = np.array([[<span class="number">4</span>, <span class="number">7</span>], [<span class="number">2</span>, <span class="number">6</span>]])
+
+<span class="comment"># Matrix inverse: A⁻¹ such that A @ A⁻¹ = I</span>
+A_inv = np.linalg.inv(A)
+
+<span class="comment"># Verify: A @ A⁻¹ should equal identity</span>
+identity = A @ A_inv
+<span class="keyword">print</span>(np.allclose(identity, np.eye(<span class="number">2</span>)))  <span class="comment"># True</span>
+
+<span class="comment"># Solving linear systems: Ax = b</span>
+b = np.array([<span class="number">1</span>, <span class="number">2</span>])
+x = np.linalg.solve(A, b)  <span class="comment"># More stable than A_inv @ b</span>
+
+<span class="comment"># Pseudo-inverse for non-square matrices</span>
+A_pinv = np.linalg.pinv(A)
+
+<span class="comment"># Note: Not all matrices are invertible (singular matrices)</span>
+<span class="comment"># A matrix is invertible iff det(A) ≠ 0</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-determinant">
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                        <span class="code-title">determinant.py</span>
+                    </div>
+                    <div class="code-body">
+                        <pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+A = np.array([[<span class="number">3</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">4</span>]])
+
+<span class="comment"># Determinant - measures "volume scaling factor"</span>
+det_A = np.linalg.det(A)  <span class="comment"># 3*4 - 1*2 = 10</span>
+
+<span class="comment"># Geometric interpretation:</span>
+<span class="comment"># - |det| = area/volume scaling factor of transformation</span>
+<span class="comment"># - det < 0 means orientation is flipped</span>
+<span class="comment"># - det = 0 means matrix is singular (collapses dimension)</span>
+
+<span class="comment"># For 2x2: det([[a,b],[c,d]]) = ad - bc</span>
+<span class="comment"># For 3x3: Use cofactor expansion or rule of Sarrus</span>
+
+<span class="comment"># Properties:</span>
+<span class="comment"># det(AB) = det(A) * det(B)</span>
+<span class="comment"># det(A⁻¹) = 1/det(A)</span>
+<span class="comment"># det(Aᵀ) = det(A)</span>
+<span class="comment"># det(cA) = cⁿ * det(A) for n×n matrix</span></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-rank">
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                        <span class="code-title">matrix_rank.py</span>
+                    </div>
+                    <div class="code-body">
+                        <pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+A = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])
+
+<span class="comment"># Rank = number of linearly independent rows/columns</span>
+rank = np.linalg.matrix_rank(A)  <span class="comment"># 2 (rows are linearly dependent)</span>
+
+<span class="comment"># Full rank: rank = min(m, n)</span>
+<span class="comment"># Rank-deficient: rank < min(m, n)</span>
+
+<span class="comment"># Null space: vectors x where Ax = 0</span>
+<span class="comment"># Dimension of null space = n - rank</span>
+
+<span class="comment"># Column space: span of column vectors</span>
+<span class="comment"># Row space: span of row vectors</span>
+
+<span class="comment"># Rank-Nullity Theorem:</span>
+<span class="comment"># rank(A) + dim(null(A)) = n (number of columns)</span></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="source-box">
+            <h4>📖 Deep Dive Resources</h4>
+            <ul>
+                <li><a href="https://numpy.org/doc/stable/reference/routines.linalg.html" target="_blank">NumPy Linear
+                        Algebra</a> (Official documentation)</li>
+                <li><a href="https://www.youtube.com/watch?v=fNk_zzaMoSs" target="_blank">3B1B: Matrix
+                        Multiplication</a> (Visual explanation)</li>
+                <li><a href="https://mathworld.wolfram.com/Matrix.html" target="_blank">Wolfram MathWorld</a>
+                    (Mathematical reference)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 3: Linear Transformations -->
+    <section class="section" id="transformations">
+        <div class="section-header">
+            <span class="section-tag">🔄 Section 03</span>
+            <h2>Linear Transformations - <span>Matrices as Functions</span></h2>
+            <p class="section-desc">A matrix represents a linear transformation - a function that preserves vector
+                addition and scalar multiplication.</p>
+        </div>
+
+        <div class="tip-box">
+            <h4>💡 Key Insight</h4>
+            <p>When you multiply a matrix by a vector, you're applying a transformation. The matrix columns tell you
+                where the basis vectors (î and ĵ) land after transformation.</p>
+        </div>
+
+        <div class="concept-grid">
+            <div class="concept-card">
+                <div class="concept-header">
+                    <span class="concept-icon">🔲</span>
+                    <span class="concept-title">Identity</span>
+                </div>
+                <div class="concept-body">I = [[1,0], [0,1]] - Does nothing, leaves vectors unchanged.</div>
+            </div>
+            <div class="concept-card">
+                <div class="concept-header">
+                    <span class="concept-icon">📏</span>
+                    <span class="concept-title">Scaling</span>
+                </div>
+                <div class="concept-body">[[s,0], [0,s]] - Stretches or shrinks uniformly.</div>
+            </div>
+            <div class="concept-card">
+                <div class="concept-header">
+                    <span class="concept-icon">🔄</span>
+                    <span class="concept-title">Rotation</span>
+                </div>
+                <div class="concept-body">[[cos θ, -sin θ], [sin θ, cos θ]] - Rotates by angle θ.</div>
+            </div>
+            <div class="concept-card">
+                <div class="concept-header">
+                    <span class="concept-icon">↔️</span>
+                    <span class="concept-title">Shear</span>
+                </div>
+                <div class="concept-body">[[1, k], [0, 1]] - Slants vectors along x-axis.</div>
+            </div>
+            <div class="concept-card">
+                <div class="concept-header">
+                    <span class="concept-icon">🪞</span>
+                    <span class="concept-title">Reflection</span>
+                </div>
+                <div class="concept-body">[[-1, 0], [0, 1]] - Flips across y-axis.</div>
+            </div>
+            <div class="concept-card">
+                <div class="concept-header">
+                    <span class="concept-icon">📽️</span>
+                    <span class="concept-title">Projection</span>
+                </div>
+                <div class="concept-body">Projects vectors onto a subspace (line, plane).</div>
+            </div>
+        </div>
+
+        <!-- Interactive Transformation Visualization -->
+        <div class="canvas-container">
+            <div class="canvas-header">
+                <span class="canvas-title">🎮 Interactive: Linear Transformation Visualizer</span>
+                <div class="canvas-controls">
+                    <button class="btn btn-secondary" id="preset-identity">Identity</button>
+                    <button class="btn btn-secondary" id="preset-scale">Scale 2×</button>
+                    <button class="btn btn-secondary" id="preset-rotate">Rotate 45°</button>
+                    <button class="btn btn-secondary" id="preset-shear">Shear</button>
+                    <button class="btn btn-secondary" id="preset-reflect">Reflect</button>
+                </div>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="transform-canvas"></canvas>
+            </div>
+            <div class="slider-group">
+                <div class="slider-item">
+                    <span class="slider-label">Matrix [a]:</span>
+                    <input type="range" id="transform-a" min="-2" max="2" step="0.1" value="1">
+                    <span class="slider-value" id="transform-a-val">1.00</span>
+                </div>
+                <div class="slider-item">
+                    <span class="slider-label">Matrix [b]:</span>
+                    <input type="range" id="transform-b" min="-2" max="2" step="0.1" value="0">
+                    <span class="slider-value" id="transform-b-val">0.00</span>
+                </div>
+                <div class="slider-item">
+                    <span class="slider-label">Matrix [c]:</span>
+                    <input type="range" id="transform-c" min="-2" max="2" step="0.1" value="0">
+                    <span class="slider-value" id="transform-c-val">0.00</span>
+                </div>
+                <div class="slider-item">
+                    <span class="slider-label">Matrix [d]:</span>
+                    <input type="range" id="transform-d" min="-2" max="2" step="0.1" value="1">
+                    <span class="slider-value" id="transform-d-val">1.00</span>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-muted); margin-top: 1rem;">
+                T = [[a, b], [c, d]] → Red = î (first column), Green = ĵ (second column)
+            </p>
+        </div>
+
+        <div class="math-box">
+            <div class="math-label">Rotation Matrix</div>
+            <div class="math-formula">
+                R(θ) = [ cos(θ) -sin(θ) ]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ sin(θ) cos(θ) ]
+            </div>
+            <p class="math-note">Rotates vectors counter-clockwise by angle θ. det(R) = 1 (preserves area and
+                orientation).</p>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">transformations.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="keyword">def</span> <span class="function">rotation_matrix</span>(theta):
+    <span class="string">"""Create 2D rotation matrix for angle theta (radians)"""</span>
+    c, s = np.cos(theta), np.sin(theta)
+    <span class="keyword">return</span> np.array([[c, -s], [s, c]])
+
+<span class="keyword">def</span> <span class="function">scale_matrix</span>(sx, sy):
+    <span class="string">"""Create scaling matrix"""</span>
+    <span class="keyword">return</span> np.array([[sx, <span class="number">0</span>], [<span class="number">0</span>, sy]])
+
+<span class="keyword">def</span> <span class="function">shear_matrix</span>(kx, ky=<span class="number">0</span>):
+    <span class="string">"""Create shear matrix"""</span>
+    <span class="keyword">return</span> np.array([[<span class="number">1</span>, kx], [ky, <span class="number">1</span>]])
+
+<span class="comment"># Apply transformation to vector</span>
+v = np.array([<span class="number">1</span>, <span class="number">0</span>])
+R = rotation_matrix(np.pi/<span class="number">4</span>)  <span class="comment"># 45 degrees</span>
+v_rotated = R @ v  <span class="comment"># [0.707, 0.707]</span>
+
+<span class="comment"># Compose transformations (order matters!)</span>
+<span class="comment"># First rotate, then scale = Scale @ Rotate</span>
+T_composed = scale_matrix(<span class="number">2</span>, <span class="number">2</span>) @ rotation_matrix(np.pi/<span class="number">4</span>)
+
+<span class="comment"># Inverse transformation</span>
+T_inv = np.linalg.inv(T_composed)</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Eigenvalues & Eigenvectors -->
+    <section class="section" id="eigen">
+        <div class="section-header">
+            <span class="section-tag">⭐ Section 04</span>
+            <h2>Eigenvalues & Eigenvectors - <span>The Special Directions</span></h2>
+            <p class="section-desc">Eigenvectors are directions that only get scaled (not rotated) by a transformation.
+                Eigenvalues tell you the scaling factor.</p>
+        </div>
+
+        <div class="math-box">
+            <div class="math-label">The Eigenvalue Equation</div>
+            <div class="math-formula">
+                Av = λv
+            </div>
+            <p class="math-note">When matrix A is applied to eigenvector v, the result is just v scaled by eigenvalue λ.
+                These special directions reveal the "principal axes" of a transformation.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🔍</div>
+                <h3>Finding Eigenvalues</h3>
+                <p>Solve the characteristic equation:</p>
+                <ul>
+                    <li><strong>det(A - λI) = 0</strong></li>
+                    <li>For 2×2: λ² - trace(A)λ + det(A) = 0</li>
+                    <li>Use quadratic formula to find λ₁, λ₂</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📐</div>
+                <h3>Finding Eigenvectors</h3>
+                <p>For each eigenvalue λ, solve:</p>
+                <ul>
+                    <li><strong>(A - λI)v = 0</strong></li>
+                    <li>Find the null space of (A - λI)</li>
+                    <li>Any non-zero vector in null space is an eigenvector</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Applications</h3>
+                <p>Eigenvectors are fundamental to:</p>
+                <ul>
+                    <li><strong>PCA:</strong> Principal Component Analysis</li>
+                    <li><strong>PageRank:</strong> Google's ranking algorithm</li>
+                    <li><strong>Vibrations:</strong> Natural frequencies</li>
+                    <li><strong>Stability:</strong> Dynamical systems</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Eigenvalue Visualization -->
+        <div class="canvas-container">
+            <div class="canvas-header">
+                <span class="canvas-title">🎮 Interactive: Eigenvalue Visualizer</span>
+                <div class="canvas-controls">
+                    <button class="btn btn-primary" id="eigen-animate">Animate</button>
+                </div>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="eigen-canvas"></canvas>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem;">
+                <div>
+                    <label style="font-size: 0.9rem; color: var(--text-secondary);">a:</label>
+                    <input type="number" id="eigen-a" value="2" step="0.5"
+                        style="width: 100%; padding: 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary);">
+                </div>
+                <div>
+                    <label style="font-size: 0.9rem; color: var(--text-secondary);">b:</label>
+                    <input type="number" id="eigen-b" value="1" step="0.5"
+                        style="width: 100%; padding: 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary);">
+                </div>
+                <div>
+                    <label style="font-size: 0.9rem; color: var(--text-secondary);">c:</label>
+                    <input type="number" id="eigen-c" value="1" step="0.5"
+                        style="width: 100%; padding: 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary);">
+                </div>
+                <div>
+                    <label style="font-size: 0.9rem; color: var(--text-secondary);">d:</label>
+                    <input type="number" id="eigen-d" value="2" step="0.5"
+                        style="width: 100%; padding: 0.5rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary);">
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-muted); margin-top: 1rem;">
+                Show eigenvectors (pink & teal) that only get scaled, not rotated, by the transformation
+            </p>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">eigenvalues.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+A = np.array([[<span class="number">2</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>]])
+
+<span class="comment"># Compute eigenvalues and eigenvectors</span>
+eigenvalues, eigenvectors = np.linalg.eig(A)
+
+<span class="keyword">print</span>(<span class="string">"Eigenvalues:"</span>, eigenvalues)   <span class="comment"># [3, 1]</span>
+<span class="keyword">print</span>(<span class="string">"Eigenvectors:"</span>)
+<span class="keyword">print</span>(eigenvectors)  <span class="comment"># Columns are eigenvectors</span>
+
+<span class="comment"># Verify: A @ v = λ * v</span>
+v1 = eigenvectors[:, <span class="number">0</span>]
+λ1 = eigenvalues[<span class="number">0</span>]
+<span class="keyword">print</span>(np.allclose(A @ v1, λ1 * v1))  <span class="comment"># True</span>
+
+<span class="comment"># Diagonalization: A = P @ D @ P⁻¹</span>
+P = eigenvectors
+D = np.diag(eigenvalues)
+P_inv = np.linalg.inv(P)
+A_reconstructed = P @ D @ P_inv
+<span class="keyword">print</span>(np.allclose(A, A_reconstructed))  <span class="comment"># True</span>
+
+<span class="comment"># Power iteration (find dominant eigenvalue)</span>
+<span class="keyword">def</span> <span class="function">power_iteration</span>(A, num_iters=<span class="number">100</span>):
+    v = np.random.rand(A.shape[<span class="number">0</span>])
+    <span class="keyword">for</span> _ <span class="keyword">in</span> range(num_iters):
+        v = A @ v
+        v = v / np.linalg.norm(v)
+    eigenvalue = (v @ A @ v) / (v @ v)
+    <span class="keyword">return</span> eigenvalue, v</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Applications in ML -->
+    <section class="section" id="applications">
+        <div class="section-header">
+            <span class="section-tag">🤖 Section 05</span>
+            <h2>Applications in <span>Machine Learning</span></h2>
+            <p class="section-desc">Linear algebra is the mathematical backbone of modern AI and machine learning.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🧠</div>
+                <h3>Neural Networks</h3>
+                <p>Every layer is a matrix multiplication followed by non-linearity.</p>
+                <ul>
+                    <li><strong>Forward:</strong> y = σ(Wx + b)</li>
+                    <li>Weights W are learned matrices</li>
+                    <li>Batch processing via matrix ops</li>
+                    <li>Backprop uses chain rule on matrices</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>PCA (Dimensionality Reduction)</h3>
+                <p>Find principal components using eigenvectors.</p>
+                <ul>
+                    <li>Compute covariance matrix</li>
+                    <li>Find eigenvectors (principal axes)</li>
+                    <li>Project data onto top-k eigenvectors</li>
+                    <li>Reduces noise, speeds computation</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔢</div>
+                <h3>SVD (Singular Value Decomposition)</h3>
+                <p>The "Swiss army knife" of linear algebra.</p>
+                <ul>
+                    <li><strong>A = UΣVᵀ</strong></li>
+                    <li>Used in recommender systems</li>
+                    <li>Image compression</li>
+                    <li>Latent semantic analysis</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">ml_applications.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA
+
+<span class="comment"># Neural Network Layer (simplified)</span>
+<span class="keyword">class</span> <span class="function">LinearLayer</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, in_features, out_features):
+        <span class="comment"># Initialize weights with Xavier initialization</span>
+        self.W = np.random.randn(out_features, in_features) * np.sqrt(<span class="number">2</span>/in_features)
+        self.b = np.zeros(out_features)
+    
+    <span class="keyword">def</span> <span class="function">forward</span>(self, x):
+        <span class="comment"># Matrix multiplication: the core of neural networks</span>
+        <span class="keyword">return</span> x @ self.W.T + self.b
+
+<span class="comment"># PCA for dimensionality reduction</span>
+X = np.random.randn(<span class="number">100</span>, <span class="number">10</span>)  <span class="comment"># 100 samples, 10 features</span>
+pca = PCA(n_components=<span class="number">3</span>)
+X_reduced = pca.fit_transform(X)  <span class="comment"># Now 100 samples, 3 features</span>
+
+<span class="comment"># Manual PCA using eigendecomposition</span>
+X_centered = X - X.mean(axis=<span class="number">0</span>)
+cov_matrix = (X_centered.T @ X_centered) / (len(X) - <span class="number">1</span>)
+eigenvalues, eigenvectors = np.linalg.eigh(cov_matrix)
+top_k_eigenvectors = eigenvectors[:, -<span class="number">3</span>:]  <span class="comment"># Top 3 components</span>
+X_pca = X_centered @ top_k_eigenvectors
+
+<span class="comment"># SVD for matrix factorization</span>
+U, S, Vt = np.linalg.svd(X, full_matrices=<span class="keyword">False</span>)
+<span class="comment"># Low-rank approximation (keep top k singular values)</span>
+k = <span class="number">3</span>
+X_approx = U[:, :k] @ np.diag(S[:k]) @ Vt[:k, :]</pre>
+            </div>
+        </div>
+
+        <div class="source-box">
+            <h4>📖 Advanced Resources</h4>
+            <ul>
+                <li><a href="https://www.deeplearningbook.org/contents/linear_algebra.html" target="_blank">Deep
+                        Learning Book - Chapter 2</a> (Goodfellow et al.)</li>
+                <li><a href="https://cs229.stanford.edu/notes2022fall/main_notes.pdf" target="_blank">Stanford CS229
+                        Notes</a> (Linear Algebra Review)</li>
+                <li><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab"
+                        target="_blank">3Blue1Brown Playlist</a> (Essential viewing)</li>
+                <li><a href="https://github.com/kenjihiranabe/The-Art-of-Linear-Algebra" target="_blank">The Art of
+                        Linear Algebra</a> (Visual guide)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Learning Roadmap -->
+    <section class="section" id="roadmap">
+        <div class="section-header">
+            <span class="section-tag">🎯 Learning Path</span>
+            <h2>Your <span>Learning Roadmap</span></h2>
+        </div>
+
+        <div class="learning-path">
+            <div class="path-line"></div>
+
+            <div class="path-item">
+                <div class="path-marker">1</div>
+                <div class="path-content">
+                    <h4>Week 1-2: Vectors & Basic Operations</h4>
+                    <p>Master vector operations, dot product, cross product. Build intuition for vector spaces.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">2</div>
+                <div class="path-content">
+                    <h4>Week 3-4: Matrices & Systems</h4>
+                    <p>Matrix operations, solving linear systems, Gaussian elimination, matrix inverse.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">3</div>
+                <div class="path-content">
+                    <h4>Week 5-6: Transformations & Determinants</h4>
+                    <p>Understand matrices as transformations. Visualize rotations, scaling, shearing.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">4</div>
+                <div class="path-content">
+                    <h4>Week 7-8: Eigenvalues & Eigenvectors</h4>
+                    <p>The crown jewel of linear algebra. Essential for PCA, PageRank, and more.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">5</div>
+                <div class="path-content">
+                    <h4>Week 9+: SVD & Applications</h4>
+                    <p>Singular Value Decomposition, PCA, and real-world ML applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Built with 💙 for learners | Master linear algebra, master machine learning</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">
+            "Linear algebra is the branch of mathematics that wins the machine learning game." - François Chollet
+        </p>
+    </footer>
+
+    <script src="linear-algebra.js"></script>
+
+</body>
+
+</html>

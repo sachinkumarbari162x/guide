@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Guide - Web, Server, Data</title>
+    <link rel="stylesheet" href="security-guide.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">_SECURITY_PROTOCOL</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#web">WEB_SEC</a></li>
+                <li><a href="#server">SERVER_HARDENING</a></li>
+                <li><a href="#data">DATA_ENCRYPTION</a></li>
+                <li><a href="#labs">LABS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1 class="glitch" data-text="SECURE THE SYSTEM">SECURE THE SYSTEM</h1>
+        <p>
+            > Initializing defense protocols...<br>
+            > Loading modules: OWASP, SSH Hardening, Encryption Standards...<br>
+            > System Status: VULNERABLE. Immediate patching required.
+        </p>
+        <button class="btn-cyber" onclick="document.getElementById('web').scrollIntoView({behavior: 'smooth'})">
+            START_DIAGNOSTIC
+        </button>
+    </section>
+
+    <!-- Section 1: Web Security -->
+    <section class="section" id="web">
+        <div class="section-header">
+            <span class="section-icon text-red">⚠️</span>
+            <h2 class="section-title">Web Vulnerabilities (OWASP)</h2>
+        </div>
+
+        <div class="grid-3">
+            <div class="cyber-card">
+                <h3 class="text-red">XSS (Cross-Site Scripting)</h3>
+                <p>Attackers inject malicious scripts into web pages viewed by other users.</p>
+                <div class="terminal">
+                    <div class="code-line"><span class="ps1">$</span>input =
+                        "&lt;script&gt;stealCookies()&lt;/script&gt;"</div>
+                    <div class="code-line text-red">> EXECUTION SUCCESSFUL</div>
+                </div>
+                <p style="margin-top: 1rem; border-top: 1px solid #333; padding-top: 0.5rem;">
+                    <span class="text-blue">FIX:</span> Escape all user input. Use Content Security Policy (CSP).
+                </p>
+            </div>
+
+            <div class="cyber-card">
+                <h3 class="text-red">CSRF (Request Forgery)</h3>
+                <p>Tricking a user into executing unwanted actions on a web application where they're authenticated.</p>
+                <p style="margin-top: 1rem; border-top: 1px solid #333; padding-top: 0.5rem;">
+                    <span class="text-blue">FIX:</span> Anti-CSRF tokens for all state-changing requests. SameSite
+                    cookie attribute.
+                </p>
+            </div>
+
+            <div class="cyber-card">
+                <h3 class="text-red">Broken Access Control</h3>
+                <p>Users acting outside of their intended permissions (e.g., normal user accessing admin panel).</p>
+                <p style="margin-top: 1rem; border-top: 1px solid #333; padding-top: 0.5rem;">
+                    <span class="text-blue">FIX:</span> Deny by default. Implement role-based access control (RBAC).
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Server Security -->
+    <section class="section" id="server">
+        <div class="section-header">
+            <span class="section-icon text-green">🛡️</span>
+            <h2 class="section-title">Server Hardening</h2>
+        </div>
+
+        <div class="grid-3">
+            <div class="cyber-card">
+                <h3>SSH Keys & Root</h3>
+                <p>Disable password login. Disable root login. Use SSH keys only.</p>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <span class="text-dim">/etc/ssh/sshd_config</span><br>
+                    <span class="text-green">PermitRootLogin no</span><br>
+                    <span class="text-green">PasswordAuthentication no</span>
+                </div>
+            </div>
+
+            <div class="cyber-card">
+                <h3>Firewall (UFW)</h3>
+                <p>The first line of defense. Deny all incoming by default.</p>
+                <div class="terminal">
+                    <div class="code-line"><span class="ps1">$</span>ufw default deny incoming</div>
+                    <div class="code-line"><span class="ps1">$</span>ufw allow ssh</div>
+                    <div class="code-line"><span class="ps1">$</span>ufw allow http</div>
+                    <div class="code-line"><span class="ps1">$</span>ufw enable</div>
+                    <div class="code-line text-green">> Firewall is active</div>
+                </div>
+            </div>
+
+            <div class="cyber-card">
+                <h3>Fail2Ban</h3>
+                <p>Scan log files and ban IPs that show the malicious signs -- too many password failures, seeking for
+                    exploits, etc.</p>
+                <p class="text-blue">Prevents Brute Force Attacks.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Data Security -->
+    <section class="section" id="data">
+        <div class="section-header">
+            <span class="section-icon text-blue">🔒</span>
+            <h2 class="section-title">Data Encryption & Storage</h2>
+        </div>
+
+        <div class="grid-3">
+            <div class="cyber-card">
+                <h3>Hashing (Passwords)</h3>
+                <p>Never store passwords in plain text. Use slow hashing algorithms.</p>
+                <ul style="list-style: none; margin-top: 1rem;">
+                    <li class="text-red">❌ MD5 (Too fast, broken)</li>
+                    <li class="text-red">❌ SHA-1 (Broken)</li>
+                    <li class="text-green">✅ BCrypt (Adaptive work factor)</li>
+                    <li class="text-green">✅ Argon2 (Memory-hard)</li>
+                </ul>
+            </div>
+
+            <div class="cyber-card">
+                <h3>Encryption (Data)</h3>
+                <p>Two types: <strong>At Rest</strong> (Database) and <strong>In Transit</strong> (HTTPS/TLS).</p>
+                <div style="margin-top: 1rem;">
+                    <span class="text-blue">AES-256</span> for symmetric (Files).<br>
+                    <span class="text-blue">RSA-4096</span> for asymmetric (Keys).
+                </div>
+            </div>
+
+            <div class="cyber-card">
+                <h3>SQL Injection</h3>
+                <p>Malicious SQL statements are inserted into entry fields for execution.</p>
+                <div class="terminal">
+                    <span class="text-dim">SELECT * FROM users WHERE</span><br>
+                    <span class="text-red">id = 1 OR 1=1; --</span>
+                </div>
+                <p class="text-blue" style="margin-top: 0.5rem;">FIX: Prepared Statements</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Labs -->
+    <section class="section" id="labs">
+        <div class="section-header">
+            <span class="section-icon text-green">🧪</span>
+            <h2 class="section-title">Security Labs</h2>
+        </div>
+
+        <!-- SQL Injection Demo -->
+        <div class="demo-stage">
+            <div class="demo-title">
+                <span>SQL Injection Visualizer</span>
+                <span style="font-size: 0.8rem; opacity: 0.7;">STATUS: UNSECURE_QUERY</span>
+            </div>
+            <p style="margin-bottom: 1rem; color: var(--text-dim);">Enter a User ID. Try entering <span
+                    class="text-red code-font">' OR '1'='1</span> to bypass.</p>
+
+            <input type="text" id="sqlInput" class="input-cyber" value="105" placeholder="Enter User ID">
+            <button class="btn-cyber red" onclick="simulateSQL()">Execute Query</button>
+
+            <div class="visual-box" style="margin-top: 1rem;" id="sqlOutput">
+                SELECT * FROM users WHERE user_id = '105';
+            </div>
+
+            <div class="visual-box"
+                style="margin-top: 0.5rem; border-color: var(--hacker-green); color: var(--hacker-green); display: none;"
+                id="sqlResult">
+                > QUERY RESULT
+            </div>
+        </div>
+
+        <!-- Encryption Demo -->
+        <div class="demo-stage">
+            <div class="demo-title">
+                <span>Hashing Lab (SHA-256)</span>
+                <span class="text-blue">ONE-WAY FUNC</span>
+            </div>
+            <p style="margin-bottom: 1rem; color: var(--text-dim);">Type anything to see its unique hash signature.
+                Slight changes produce wildly different hashes (Avalanche Effect).</p>
+
+            <input type="text" id="hashInput" class="input-cyber" placeholder="Type secret message..."
+                oninput="updateHash()">
+
+            <div class="visual-box" id="hashOutput" style="color: var(--secure-blue);">
+                Waiting for input...
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        > SYSTEM TERMINATED.<br>
+        > REMEMBER: Security is a process, not a product.
+    </footer>
+
+    <script src="security-guide.js"></script>
+</body>
+
+</html>

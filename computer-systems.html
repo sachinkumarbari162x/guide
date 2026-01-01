@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Systems for LLMs - Complete Learning Guide</title>
+    <link rel="stylesheet" href="computer-systems.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">🖥️ Computer Systems</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#memory">Memory</a></li>
+                <li><a href="#gpu">GPU Architecture</a></li>
+                <li><a href="#distributed">Distributed</a></li>
+                <li><a href="#optimization">Optimization</a></li>
+                <li><a href="#benchmarks">Benchmarks</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-badge">⚡ Hardware for AI</div>
+        <h1>Computer Systems for <span class="gradient">LLM Building</span></h1>
+        <p class="hero-subtitle">
+            Understand the hardware foundations of modern AI. From GPU architecture to distributed training systems -
+            the infrastructure behind large language models.
+        </p>
+
+        <div class="hw-icons">
+            <div class="hw-icon"><span>GPU</span>🎮</div>
+            <div class="hw-icon"><span>RAM</span>💾</div>
+            <div class="hw-icon"><span>CPU</span>🔲</div>
+            <div class="hw-icon"><span>NVMe</span>💿</div>
+            <div class="hw-icon"><span>Network</span>🌐</div>
+        </div>
+    </section>
+
+    <!-- Section 1: Memory Hierarchy -->
+    <section class="section" id="memory">
+        <div class="section-header">
+            <span class="section-tag">Section 01</span>
+            <h2>Memory <span>Hierarchy</span></h2>
+            <p class="section-desc">Understanding memory is critical for LLM performance. Speed, bandwidth, and capacity
+                trade-offs at every level.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Why Memory Matters</h3>
+                <p>LLMs are memory-bound, not compute-bound.</p>
+                <ul>
+                    <li>Model weights must fit in memory</li>
+                    <li>Batch size limited by VRAM</li>
+                    <li>Bandwidth determines tokens/sec</li>
+                    <li>KV cache grows with context length</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Memory Bandwidth</h3>
+                <p>How fast data moves matters more than latency.</p>
+                <ul>
+                    <li>DDR5 RAM: ~50 GB/s</li>
+                    <li>HBM3 (H100): ~3.35 TB/s</li>
+                    <li>L2 Cache: ~100+ GB/s</li>
+                    <li>Registers: ~1 TB/s</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🧮</div>
+                <h3>LLM Memory Formula</h3>
+                <p>Calculate memory requirements.</p>
+                <ul>
+                    <li><strong>Weights:</strong> params × bytes/param</li>
+                    <li><strong>KV Cache:</strong> 2 × layers × d_model × seq_len × batch</li>
+                    <li><strong>Activations:</strong> peak during forward pass</li>
+                    <li><strong>Gradients:</strong> 2× weights (training)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Memory Hierarchy -->
+        <div class="arch-diagram">
+            <div class="arch-header">
+                <span class="arch-title">🎮 Interactive: Memory Hierarchy</span>
+                <span style="color: var(--text-muted); font-size: 0.9rem;">Click levels to explore</span>
+            </div>
+
+            <div class="memory-hierarchy">
+                <div class="memory-level registers">Registers</div>
+                <div class="memory-level l1-cache">L1 Cache</div>
+                <div class="memory-level l2-cache">L2 Cache</div>
+                <div class="memory-level l3-cache">L3 Cache</div>
+                <div class="memory-level ram">System RAM (DDR5)</div>
+                <div class="memory-level vram">GPU VRAM (HBM3)</div>
+                <div class="memory-level storage">NVMe Storage</div>
+            </div>
+
+            <div id="memory-info"
+                style="margin-top: 1.5rem; padding: 1rem; background: var(--bg-primary); border-radius: 8px; min-height: 100px;">
+                <div style="color: var(--text-muted);">Click on a memory level to see details...</div>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">memory_calculation.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">def</span> <span class="function">calculate_llm_memory</span>(
+    num_params_billion: <span class="type">float</span>,
+    precision: <span class="type">str</span> = <span class="string">"fp16"</span>,
+    batch_size: <span class="type">int</span> = <span class="number">1</span>,
+    seq_length: <span class="type">int</span> = <span class="number">2048</span>,
+    num_layers: <span class="type">int</span> = <span class="number">32</span>,
+    hidden_dim: <span class="type">int</span> = <span class="number">4096</span>,
+) -> <span class="type">dict</span>:
+    <span class="string">"""Calculate memory requirements for LLM inference"""</span>
+    
+    bytes_per_param = {<span class="string">"fp32"</span>: <span class="number">4</span>, <span class="string">"fp16"</span>: <span class="number">2</span>, <span class="string">"int8"</span>: <span class="number">1</span>, <span class="string">"int4"</span>: <span class="number">0.5</span>}
+    
+    <span class="comment"># Model weights</span>
+    weights_gb = (num_params_billion * <span class="number">1e9</span> * bytes_per_param[precision]) / (<span class="number">1024</span>**<span class="number">3</span>)
+    
+    <span class="comment"># KV Cache: 2 (K+V) × layers × hidden × seq × batch × bytes</span>
+    kv_cache_gb = (<span class="number">2</span> * num_layers * hidden_dim * seq_length * 
+                   batch_size * bytes_per_param[precision]) / (<span class="number">1024</span>**<span class="number">3</span>)
+    
+    <span class="keyword">return</span> {
+        <span class="string">"weights_gb"</span>: weights_gb,
+        <span class="string">"kv_cache_gb"</span>: kv_cache_gb,
+        <span class="string">"total_gb"</span>: weights_gb + kv_cache_gb
+    }
+
+<span class="comment"># Example: LLaMA 70B at FP16</span>
+mem = calculate_llm_memory(<span class="number">70</span>, <span class="string">"fp16"</span>, batch_size=<span class="number">1</span>, seq_length=<span class="number">4096</span>)
+<span class="keyword">print</span>(<span class="string">f"Weights: {mem['weights_gb']:.1f} GB"</span>)    <span class="comment"># ~140 GB</span>
+<span class="keyword">print</span>(<span class="string">f"KV Cache: {mem['kv_cache_gb']:.1f} GB"</span>)  <span class="comment"># ~2 GB per request</span></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: GPU Architecture -->
+    <section class="section" id="gpu">
+        <div class="section-header">
+            <span class="section-tag">Section 02</span>
+            <h2>GPU <span>Architecture</span></h2>
+            <p class="section-desc">Modern LLMs run on GPUs. Understanding GPU architecture helps optimize inference and
+                training.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🎮</div>
+                <h3>Streaming Multiprocessors</h3>
+                <p>The compute building blocks.</p>
+                <ul>
+                    <li>H100: 132 SMs, 16,896 CUDA cores</li>
+                    <li>Each SM: 128 FP32 cores</li>
+                    <li>Tensor Cores for matrix ops</li>
+                    <li>Shared memory per SM</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🧊</div>
+                <h3>Tensor Cores</h3>
+                <p>Specialized matrix multiplication units.</p>
+                <ul>
+                    <li>4x4 matrix ops per cycle</li>
+                    <li>FP16, BF16, INT8, FP8 support</li>
+                    <li>Critical for transformer attention</li>
+                    <li>H100: 528 Tensor Cores</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">💾</div>
+                <h3>HBM3 Memory</h3>
+                <p>High Bandwidth Memory for AI.</p>
+                <ul>
+                    <li>Stacked DRAM on package</li>
+                    <li>H100: 80GB @ 3.35 TB/s</li>
+                    <li>A100: 80GB @ 2.0 TB/s</li>
+                    <li>Bottleneck for LLM inference</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- GPU Architecture Canvas -->
+        <div class="arch-diagram">
+            <div class="arch-header">
+                <span class="arch-title">🎮 Interactive: GPU Die Layout</span>
+            </div>
+            <div class="arch-canvas">
+                <canvas id="gpu-canvas"></canvas>
+            </div>
+            <div id="gpu-info"
+                style="margin-top: 1rem; padding: 1rem; background: var(--bg-primary); border-radius: 8px;">
+                <p style="color: var(--text-muted);">Click on the GPU diagram to learn about each component.</p>
+            </div>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">1,979</div>
+                <div class="metric-label">TFLOPS (FP16)</div>
+                <div class="metric-sublabel">H100 SXM</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">3.35</div>
+                <div class="metric-label">TB/s Bandwidth</div>
+                <div class="metric-sublabel">HBM3</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">80</div>
+                <div class="metric-label">GB VRAM</div>
+                <div class="metric-sublabel">Per GPU</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">700W</div>
+                <div class="metric-label">TDP</div>
+                <div class="metric-sublabel">Power Draw</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Distributed Training -->
+    <section class="section" id="distributed">
+        <div class="section-header">
+            <span class="section-tag">Section 03</span>
+            <h2>Distributed <span>Training</span></h2>
+            <p class="section-desc">Large models require multiple GPUs. Different parallelism strategies for different
+                bottlenecks.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Data Parallelism</h3>
+                <p>Same model, different data batches.</p>
+                <ul>
+                    <li>Replicate model on each GPU</li>
+                    <li>Split batch across GPUs</li>
+                    <li>AllReduce to sync gradients</li>
+                    <li>Scales with batch size</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔀</div>
+                <h3>Tensor Parallelism</h3>
+                <p>Split layers across GPUs.</p>
+                <ul>
+                    <li>Partition weight matrices</li>
+                    <li>High bandwidth needed (NVLink)</li>
+                    <li>Great for large attention layers</li>
+                    <li>Typically 2-8 GPUs</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>Pipeline Parallelism</h3>
+                <p>Different layers on different GPUs.</p>
+                <ul>
+                    <li>Sequential layer assignment</li>
+                    <li>Micro-batches for efficiency</li>
+                    <li>Reduces bubble overhead</li>
+                    <li>Scales to many GPUs</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Distributed Training Visualization -->
+        <div class="arch-diagram">
+            <div class="arch-header">
+                <span class="arch-title">🎮 Interactive: Parallelism Strategies</span>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary parallel-btn active" data-mode="data-parallel">Data
+                        Parallel</button>
+                    <button class="btn btn-secondary parallel-btn" data-mode="model-parallel">Tensor Parallel</button>
+                    <button class="btn btn-secondary parallel-btn" data-mode="pipeline">Pipeline</button>
+                </div>
+            </div>
+            <div class="arch-canvas">
+                <canvas id="distributed-canvas"></canvas>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">distributed_training.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> torch
+<span class="keyword">import</span> torch.distributed <span class="keyword">as</span> dist
+<span class="keyword">from</span> torch.nn.parallel <span class="keyword">import</span> DistributedDataParallel <span class="keyword">as</span> DDP
+
+<span class="comment"># Initialize distributed process group</span>
+dist.init_process_group(backend=<span class="string">"nccl"</span>)  <span class="comment"># NCCL for GPUs</span>
+rank = dist.get_rank()
+world_size = dist.get_world_size()
+
+<span class="comment"># Wrap model with DDP (Data Parallelism)</span>
+model = MyLLM().to(rank)
+model = DDP(model, device_ids=[rank])
+
+<span class="comment"># DeepSpeed for 3D parallelism</span>
+<span class="keyword">import</span> deepspeed
+model, optimizer, _, _ = deepspeed.initialize(
+    model=model,
+    config={
+        <span class="string">"train_batch_size"</span>: <span class="number">256</span>,
+        <span class="string">"zero_optimization"</span>: {<span class="string">"stage"</span>: <span class="number">3</span>},  <span class="comment"># ZeRO-3</span>
+        <span class="string">"fp16"</span>: {<span class="string">"enabled"</span>: <span class="keyword">True</span>},
+        <span class="string">"tensor_parallel"</span>: {<span class="string">"tp_size"</span>: <span class="number">8</span>},
+        <span class="string">"pipeline_parallel"</span>: {<span class="string">"pp_size"</span>: <span class="number">4</span>},
+    }
+)</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Optimization -->
+    <section class="section" id="optimization">
+        <div class="section-header">
+            <span class="section-tag">Section 04</span>
+            <h2>Performance <span>Optimization</span></h2>
+            <p class="section-desc">Techniques to maximize throughput and minimize latency.</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="tab-quantization">Quantization</button>
+                <button class="tab-btn" data-tab="tab-kernels">Custom Kernels</button>
+                <button class="tab-btn" data-tab="tab-inference">Inference Opts</button>
+            </div>
+
+            <div class="tab-panel active" id="tab-quantization">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>FP16 / BF16</h3>
+                        <p>Half-precision training standard.</p>
+                        <ul>
+                            <li>2x memory savings vs FP32</li>
+                            <li>Tensor Core acceleration</li>
+                            <li>BF16: better dynamic range</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>INT8 Quantization</h3>
+                        <p>Post-training quantization.</p>
+                        <ul>
+                            <li>4x memory savings vs FP32</li>
+                            <li>Minimal accuracy loss</li>
+                            <li>LLM.int8(), GPTQ, AWQ</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>INT4 / GGML</h3>
+                        <p>Extreme compression for inference.</p>
+                        <ul>
+                            <li>8x memory savings</li>
+                            <li>Run 70B on consumer GPU</li>
+                            <li>Some quality degradation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-kernels">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>FlashAttention</h3>
+                        <p>IO-aware attention algorithm.</p>
+                        <ul>
+                            <li>Fused kernel, less memory traffic</li>
+                            <li>O(N) memory vs O(N²)</li>
+                            <li>2-4x faster attention</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Triton Kernels</h3>
+                        <p>Python-based GPU programming.</p>
+                        <ul>
+                            <li>Write CUDA in Python</li>
+                            <li>Automatic optimization</li>
+                            <li>Custom fused operations</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>CUDA Graphs</h3>
+                        <p>Reduce kernel launch overhead.</p>
+                        <ul>
+                            <li>Capture and replay operations</li>
+                            <li>Minimize CPU-GPU sync</li>
+                            <li>10-30% speedup</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-inference">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>KV Cache</h3>
+                        <p>Cache key-value pairs for autoregressive.</p>
+                        <ul>
+                            <li>Avoid recomputation</li>
+                            <li>Memory grows with seq length</li>
+                            <li>PagedAttention for efficiency</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Continuous Batching</h3>
+                        <p>Dynamic batch management.</p>
+                        <ul>
+                            <li>Add/remove requests dynamically</li>
+                            <li>Better GPU utilization</li>
+                            <li>vLLM, TensorRT-LLM</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Speculative Decoding</h3>
+                        <p>Use small model to draft tokens.</p>
+                        <ul>
+                            <li>Draft model generates candidates</li>
+                            <li>Main model verifies in parallel</li>
+                            <li>2-3x faster decoding</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Benchmarks -->
+    <section class="section" id="benchmarks">
+        <div class="section-header">
+            <span class="section-tag">Section 05</span>
+            <h2>Hardware <span>Calculator</span></h2>
+            <p class="section-desc">Estimate memory requirements and performance for your LLM deployment.</p>
+        </div>
+
+        <div class="arch-diagram">
+            <div class="arch-header">
+                <span class="arch-title">🎮 LLM Hardware Requirements Calculator</span>
+            </div>
+
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                <div>
+                    <label
+                        style="display: block; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Model
+                        Parameters (Billion):</label>
+                    <input type="number" id="model-params" value="7" step="0.1"
+                        style="width: 100%; padding: 0.8rem; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'Fira Code';">
+                </div>
+                <div>
+                    <label
+                        style="display: block; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Precision:</label>
+                    <select id="precision-select"
+                        style="width: 100%; padding: 0.8rem; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary);">
+                        <option value="fp32">FP32 (4 bytes)</option>
+                        <option value="fp16" selected>FP16 (2 bytes)</option>
+                        <option value="int8">INT8 (1 byte)</option>
+                    </select>
+                </div>
+                <div>
+                    <label
+                        style="display: block; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">GPU
+                        VRAM (GB):</label>
+                    <input type="number" id="gpu-vram" value="24" step="1"
+                        style="width: 100%; padding: 0.8rem; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'Fira Code';">
+                </div>
+                <div>
+                    <label
+                        style="display: block; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">GPU
+                        Bandwidth (GB/s):</label>
+                    <input type="number" id="gpu-bandwidth" value="900" step="10"
+                        style="width: 100%; padding: 0.8rem; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: 'Fira Code';">
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="calc-benchmark">Calculate Requirements</button>
+
+            <div id="benchmark-result" style="margin-top: 1.5rem;">
+                <div style="color: var(--text-muted);">Enter parameters and click calculate...</div>
+            </div>
+        </div>
+
+        <div class="source-box">
+            <h4>📖 Learning Resources</h4>
+            <ul>
+                <li><a href="https://developer.nvidia.com/blog/cuda-programming-guide/" target="_blank">NVIDIA CUDA
+                        Programming Guide</a></li>
+                <li><a href="https://huggingface.co/docs/transformers/perf_train_gpu_many" target="_blank">HuggingFace -
+                        Multi-GPU Training</a></li>
+                <li><a href="https://www.deepspeed.ai/" target="_blank">DeepSpeed Documentation</a></li>
+                <li><a href="https://docs.vllm.ai/" target="_blank">vLLM - Fast LLM Inference</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Learning Path -->
+    <section class="section" id="roadmap">
+        <div class="section-header">
+            <span class="section-tag">🎯 Learning Path</span>
+            <h2>Your <span>Systems Journey</span></h2>
+        </div>
+
+        <div class="learning-path">
+            <div class="path-line"></div>
+
+            <div class="path-item">
+                <div class="path-marker">1</div>
+                <div class="path-content">
+                    <h4>Week 1-2: Memory Fundamentals</h4>
+                    <p>Understand cache hierarchy, bandwidth vs latency, memory-bound vs compute-bound.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">2</div>
+                <div class="path-content">
+                    <h4>Week 3-4: GPU Programming Basics</h4>
+                    <p>CUDA fundamentals, thread blocks, warps, memory coalescing.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">3</div>
+                <div class="path-content">
+                    <h4>Week 5-6: Distributed Computing</h4>
+                    <p>MPI concepts, NCCL, data/model/pipeline parallelism.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">4</div>
+                <div class="path-content">
+                    <h4>Week 7-8: LLM-Specific Optimizations</h4>
+                    <p>FlashAttention, quantization, KV cache, continuous batching.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">5</div>
+                <div class="path-content">
+                    <h4>Week 9+: Production Deployment</h4>
+                    <p>vLLM, TensorRT-LLM, load balancing, monitoring.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Built with 💙 for AI engineers | Hardware is the foundation</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">
+            "The bottleneck is always memory bandwidth." - Every GPU programmer, ever
+        </p>
+    </footer>
+
+    <script src="computer-systems.js"></script>
+
+</body>
+
+</html>

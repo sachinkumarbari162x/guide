@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculus - Complete Learning Guide</title>
+    <link rel="stylesheet" href="calculus.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">∫ Calculus Guide</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#limits">Limits</a></li>
+                <li><a href="#derivatives">Derivatives</a></li>
+                <li><a href="#integrals">Integrals</a></li>
+                <li><a href="#applications">Applications</a></li>
+                <li><a href="#multivariable">Multivariable</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-badge">📐 Foundation of Machine Learning</div>
+        <h1>Master <span class="gradient">Calculus</span></h1>
+        <p class="hero-subtitle">
+            The mathematical language of change and accumulation. Essential for understanding optimization, neural
+            networks, and the mathematics behind every ML algorithm.
+        </p>
+    </section>
+
+    <!-- Section 1: Limits -->
+    <section class="section" id="limits">
+        <div class="section-header">
+            <span class="section-tag">Section 01</span>
+            <h2>Limits - <span>The Foundation</span></h2>
+            <p class="section-desc">Limits describe the behavior of functions as inputs approach certain values - the
+                gateway to calculus.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>What is a Limit?</h3>
+                <p>A limit describes what value a function approaches as the input approaches some value.</p>
+                <ul>
+                    <li><strong>Notation:</strong> lim(x→c) f(x) = L</li>
+                    <li>L is the limit value</li>
+                    <li>c is the point we're approaching</li>
+                    <li>We get arbitrarily close, but may not reach</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📏</div>
+                <h3>Epsilon-Delta Definition</h3>
+                <p>The rigorous definition of limits.</p>
+                <ul>
+                    <li>For every ε > 0, there exists δ > 0</li>
+                    <li>If 0 < |x - c| < δ</li>
+                    <li>Then |f(x) - L| < ε</li>
+                    <li>δ controls input, ε controls output</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔧</div>
+                <h3>Limit Laws</h3>
+                <p>Rules for computing limits.</p>
+                <ul>
+                    <li><strong>Sum:</strong> lim(f+g) = lim f + lim g</li>
+                    <li><strong>Product:</strong> lim(f·g) = lim f · lim g</li>
+                    <li><strong>Quotient:</strong> lim(f/g) = lim f / lim g</li>
+                    <li><strong>Composition:</strong> lim f(g(x))</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Limit Visualization -->
+        <div class="canvas-container">
+            <div class="canvas-header">
+                <span class="canvas-title">🎮 Interactive: Epsilon-Delta Visualization</span>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="limit-canvas"></canvas>
+            </div>
+            <div class="slider-group">
+                <div class="slider-item">
+                    <span class="slider-label">Epsilon (ε):</span>
+                    <input type="range" id="epsilon-slider" min="0.1" max="2" step="0.1" value="0.5">
+                    <span class="slider-value" id="epsilon-val">0.50</span>
+                </div>
+                <div class="slider-item">
+                    <span class="slider-label">Delta (δ):</span>
+                    <input type="range" id="delta-slider" min="0.1" max="2" step="0.1" value="0.5">
+                    <span class="slider-value" id="delta-val">0.50</span>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-muted); margin-top: 1rem;">
+                The green band shows ε (output tolerance), purple band shows δ (input tolerance). For limits to exist,
+                we must find δ for any ε.
+            </p>
+        </div>
+
+        <div class="math-box">
+            <div class="math-label">Important Limits</div>
+            <div class="math-formula">
+                lim(x→0) sin(x)/x = 1 &nbsp;&nbsp;|&nbsp;&nbsp; lim(x→∞) (1 + 1/x)ˣ = e
+            </div>
+        </div>
+
+        <div class="source-box">
+            <h4>📖 Learning Resources</h4>
+            <ul>
+                <li><a href="https://www.khanacademy.org/math/ap-calculus-ab/ab-limits-new" target="_blank">Khan Academy
+                        - Limits</a></li>
+                <li><a href="https://ocw.mit.edu/courses/18-01-single-variable-calculus-fall-2006/" target="_blank">MIT
+                        OCW 18.01 - Single Variable Calculus</a></li>
+                <li><a href="https://www.3blue1brown.com/topics/calculus" target="_blank">3Blue1Brown - Essence of
+                        Calculus</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 2: Derivatives -->
+    <section class="section" id="derivatives">
+        <div class="section-header">
+            <span class="section-tag">Section 02</span>
+            <h2>Derivatives - <span>Rates of Change</span></h2>
+            <p class="section-desc">The derivative measures instantaneous rate of change - the slope of the tangent line
+                at any point.</p>
+        </div>
+
+        <div class="math-box">
+            <div class="math-label">Definition of the Derivative</div>
+            <div class="math-formula">
+                f'(x) = lim(h→0) [f(x+h) - f(x)] / h
+            </div>
+            <p class="math-note">The derivative is the limit of the difference quotient - the slope as the secant line
+                becomes a tangent.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📈</div>
+                <h3>Geometric Meaning</h3>
+                <p>The derivative at a point is the slope of the tangent line.</p>
+                <ul>
+                    <li>f'(x) > 0: function increasing</li>
+                    <li>f'(x) < 0: function decreasing</li>
+                    <li>f'(x) = 0: critical point (max/min)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔢</div>
+                <h3>Common Derivatives</h3>
+                <ul>
+                    <li>d/dx [xⁿ] = n·xⁿ⁻¹ (Power Rule)</li>
+                    <li>d/dx [eˣ] = eˣ</li>
+                    <li>d/dx [sin x] = cos x</li>
+                    <li>d/dx [ln x] = 1/x</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚙️</div>
+                <h3>Differentiation Rules</h3>
+                <ul>
+                    <li><strong>Sum:</strong> (f+g)' = f' + g'</li>
+                    <li><strong>Product:</strong> (fg)' = f'g + fg'</li>
+                    <li><strong>Quotient:</strong> (f/g)' = (f'g - fg')/g²</li>
+                    <li><strong>Chain:</strong> (f∘g)' = f'(g) · g'</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Derivative Visualization -->
+        <div class="canvas-container">
+            <div class="canvas-header">
+                <span class="canvas-title">🎮 Interactive: Derivative Visualizer</span>
+                <div class="canvas-controls">
+                    <select id="func-select" class="btn btn-secondary" style="padding: 0.5rem 1rem;">
+                        <option value="x^2">f(x) = x²</option>
+                        <option value="x^3">f(x) = x³</option>
+                        <option value="sin(x)">f(x) = sin(x)</option>
+                        <option value="e^x">f(x) = eˣ</option>
+                        <option value="1/x">f(x) = 1/x</option>
+                    </select>
+                    <button class="btn btn-primary" id="toggle-tangent">Hide Tangent</button>
+                </div>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="derivative-canvas"></canvas>
+            </div>
+            <div class="slider-group">
+                <div class="slider-item">
+                    <span class="slider-label">Point x:</span>
+                    <input type="range" id="point-x" min="-3" max="3" step="0.1" value="1">
+                    <span class="slider-value" id="point-x-val">1.00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chain Rule Demo -->
+        <div class="concept-box">
+            <h4>🔗 The Chain Rule - Essential for Neural Networks</h4>
+            <p>When you have nested functions f(g(x)), the derivative is: d/dx[f(g(x))] = f'(g(x)) · g'(x)</p>
+            <p style="margin-top: 0.5rem;">This is the mathematical foundation of <strong>backpropagation</strong> in
+                deep learning!</p>
+        </div>
+
+        <div class="canvas-container" id="chain-rule-demo">
+            <div class="canvas-header">
+                <span class="canvas-title">🎮 Interactive: Chain Rule Step-by-Step</span>
+                <div class="canvas-controls">
+                    <button class="btn btn-primary" id="run-chain">Run Derivation</button>
+                </div>
+            </div>
+            <div class="demo-output"
+                style="background: #080810; border-radius: 8px; padding: 1.5rem; min-height: 200px; font-size: 0.9rem;">
+                <div style="color: var(--text-muted);">Click "Run Derivation" to see the chain rule applied step by
+                    step...</div>
+            </div>
+        </div>
+
+        <div class="formula-grid">
+            <div class="formula-card">
+                <h4>Power Rule</h4>
+                <div class="formula">d/dx [xⁿ] = n·xⁿ⁻¹</div>
+            </div>
+            <div class="formula-card">
+                <h4>Product Rule</h4>
+                <div class="formula">(uv)' = u'v + uv'</div>
+            </div>
+            <div class="formula-card">
+                <h4>Quotient Rule</h4>
+                <div class="formula">(u/v)' = (u'v - uv')/v²</div>
+            </div>
+            <div class="formula-card">
+                <h4>Chain Rule</h4>
+                <div class="formula">d/dx[f(g(x))] = f'(g)·g'</div>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">derivatives.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">from</span> scipy.misc <span class="keyword">import</span> derivative
+
+<span class="comment"># Numerical derivative</span>
+<span class="keyword">def</span> <span class="function">numerical_derivative</span>(f, x, h=<span class="number">1e-7</span>):
+    <span class="string">"""Central difference approximation"""</span>
+    <span class="keyword">return</span> (f(x + h) - f(x - h)) / (<span class="number">2</span> * h)
+
+<span class="comment"># Example functions and their derivatives</span>
+f = <span class="keyword">lambda</span> x: x**<span class="number">2</span>
+df_analytical = <span class="keyword">lambda</span> x: <span class="number">2</span>*x
+
+<span class="comment"># Compare numerical vs analytical</span>
+x = <span class="number">3</span>
+<span class="keyword">print</span>(<span class="string">f"Numerical: {numerical_derivative(f, x):.6f}"</span>)  <span class="comment"># ≈ 6.0</span>
+<span class="keyword">print</span>(<span class="string">f"Analytical: {df_analytical(x)}"</span>)               <span class="comment"># = 6</span>
+
+<span class="comment"># Using SciPy</span>
+<span class="keyword">print</span>(derivative(f, x, dx=<span class="number">1e-8</span>))                       <span class="comment"># ≈ 6.0</span>
+
+<span class="comment"># Gradient (vector of partial derivatives) - ML essential!</span>
+<span class="keyword">def</span> <span class="function">gradient</span>(f, x, h=<span class="number">1e-7</span>):
+    <span class="string">"""Numerical gradient for n-dimensional input"""</span>
+    grad = np.zeros_like(x)
+    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(x)):
+        x_plus = x.copy(); x_plus[i] += h
+        x_minus = x.copy(); x_minus[i] -= h
+        grad[i] = (f(x_plus) - f(x_minus)) / (<span class="number">2</span> * h)
+    <span class="keyword">return</span> grad</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Integrals -->
+    <section class="section" id="integrals">
+        <div class="section-header">
+            <span class="section-tag">Section 03</span>
+            <h2>Integrals - <span>Accumulation</span></h2>
+            <p class="section-desc">Integration is the reverse of differentiation - finding areas, volumes, and
+                accumulated quantities.</p>
+        </div>
+
+        <div class="math-box">
+            <div class="math-label">The Fundamental Theorem of Calculus</div>
+            <div class="math-formula">
+                ∫ₐᵇ f(x)dx = F(b) - F(a) &nbsp; where F'(x) = f(x)
+            </div>
+            <p class="math-note">The definite integral equals the antiderivative evaluated at the bounds. This connects
+                differentiation and integration.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Definite Integrals</h3>
+                <p>Compute accumulated quantity between bounds.</p>
+                <ul>
+                    <li>Area under a curve</li>
+                    <li>∫ₐᵇ f(x)dx = signed area</li>
+                    <li>Riemann sums as approximation</li>
+                    <li>Left, right, midpoint methods</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">♾️</div>
+                <h3>Indefinite Integrals</h3>
+                <p>Finding antiderivatives (reverse of derivatives).</p>
+                <ul>
+                    <li>∫xⁿdx = xⁿ⁺¹/(n+1) + C</li>
+                    <li>∫eˣdx = eˣ + C</li>
+                    <li>∫sin(x)dx = -cos(x) + C</li>
+                    <li>∫1/x dx = ln|x| + C</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔧</div>
+                <h3>Integration Techniques</h3>
+                <ul>
+                    <li><strong>Substitution:</strong> u = g(x)</li>
+                    <li><strong>By Parts:</strong> ∫udv = uv - ∫vdu</li>
+                    <li><strong>Partial Fractions</strong></li>
+                    <li><strong>Trig Substitution</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Integral Visualization -->
+        <div class="canvas-container">
+            <div class="canvas-header">
+                <span class="canvas-title">🎮 Interactive: Riemann Sums</span>
+                <div class="canvas-controls">
+                    <button class="btn btn-secondary method-btn active" data-method="left">Left</button>
+                    <button class="btn btn-secondary method-btn" data-method="right">Right</button>
+                    <button class="btn btn-secondary method-btn" data-method="mid">Midpoint</button>
+                </div>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="integral-canvas"></canvas>
+            </div>
+            <div class="slider-group">
+                <div class="slider-item">
+                    <span class="slider-label">Rectangles (n):</span>
+                    <input type="range" id="num-rects" min="2" max="50" step="1" value="10">
+                    <span class="slider-value" id="num-rects-val">10</span>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-muted); margin-top: 1rem;">
+                Increase the number of rectangles to see the Riemann sum converge to the exact integral value (x³/3).
+            </p>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">integration.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">from</span> scipy <span class="keyword">import</span> integrate
+
+<span class="comment"># Numerical integration methods</span>
+<span class="keyword">def</span> <span class="function">riemann_sum</span>(f, a, b, n, method=<span class="string">'left'</span>):
+    <span class="string">"""Riemann sum approximation"""</span>
+    dx = (b - a) / n
+    total = <span class="number">0</span>
+    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):
+        <span class="keyword">if</span> method == <span class="string">'left'</span>:
+            x = a + i * dx
+        <span class="keyword">elif</span> method == <span class="string">'right'</span>:
+            x = a + (i + <span class="number">1</span>) * dx
+        <span class="keyword">else</span>:  <span class="comment"># midpoint</span>
+            x = a + (i + <span class="number">0.5</span>) * dx
+        total += f(x) * dx
+    <span class="keyword">return</span> total
+
+<span class="comment"># Example: ∫₀³ x² dx = [x³/3]₀³ = 9</span>
+f = <span class="keyword">lambda</span> x: x**<span class="number">2</span>
+<span class="keyword">print</span>(riemann_sum(f, <span class="number">0</span>, <span class="number">3</span>, <span class="number">1000</span>))  <span class="comment"># ≈ 9.0</span>
+
+<span class="comment"># SciPy integration (more accurate)</span>
+result, error = integrate.quad(f, <span class="number">0</span>, <span class="number">3</span>)
+<span class="keyword">print</span>(<span class="string">f"Integral: {result}, Error: {error}"</span>)
+
+<span class="comment"># Monte Carlo integration (useful for high dimensions)</span>
+<span class="keyword">def</span> <span class="function">monte_carlo_integrate</span>(f, a, b, n=<span class="number">100000</span>):
+    x = np.random.uniform(a, b, n)
+    <span class="keyword">return</span> (b - a) * np.mean(f(x))</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Applications in ML -->
+    <section class="section" id="applications">
+        <div class="section-header">
+            <span class="section-tag">Section 04</span>
+            <h2>Applications in <span>Machine Learning</span></h2>
+            <p class="section-desc">Calculus powers every aspect of modern machine learning - from training to
+                optimization.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📉</div>
+                <h3>Gradient Descent</h3>
+                <p>The core optimization algorithm in ML.</p>
+                <ul>
+                    <li>θ = θ - α · ∇L(θ)</li>
+                    <li>α = learning rate</li>
+                    <li>∇L = gradient of loss</li>
+                    <li>Move opposite to gradient direction</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔙</div>
+                <h3>Backpropagation</h3>
+                <p>Chain rule applied to neural networks.</p>
+                <ul>
+                    <li>Compute ∂L/∂w for all weights</li>
+                    <li>Propagate error backward</li>
+                    <li>Chain rule through layers</li>
+                    <li>Efficient gradient computation</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Loss Functions</h3>
+                <p>Functions we minimize via calculus.</p>
+                <ul>
+                    <li>MSE: L = (1/n)Σ(y - ŷ)²</li>
+                    <li>Cross-entropy for classification</li>
+                    <li>Must be differentiable</li>
+                    <li>Gradient gives descent direction</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="math-box">
+            <div class="math-label">Gradient Descent Update Rule</div>
+            <div class="math-formula">
+                θₜ₊₁ = θₜ - α · ∂L/∂θ
+            </div>
+            <p class="math-note">Move parameters in the direction that reduces loss. The gradient tells us the steepest
+                ascent direction.</p>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">gradient_descent.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="keyword">def</span> <span class="function">gradient_descent</span>(f, grad_f, x0, lr=<span class="number">0.01</span>, epochs=<span class="number">100</span>):
+    <span class="string">"""Find minimum of f using gradient descent"""</span>
+    x = x0.copy()
+    history = [x.copy()]
+    
+    <span class="keyword">for</span> _ <span class="keyword">in</span> range(epochs):
+        gradient = grad_f(x)
+        x = x - lr * gradient  <span class="comment"># The key update!</span>
+        history.append(x.copy())
+    
+    <span class="keyword">return</span> x, history
+
+<span class="comment"># Example: minimize f(x,y) = x² + y² (minimum at origin)</span>
+f = <span class="keyword">lambda</span> x: x[<span class="number">0</span>]**<span class="number">2</span> + x[<span class="number">1</span>]**<span class="number">2</span>
+grad_f = <span class="keyword">lambda</span> x: np.array([<span class="number">2</span>*x[<span class="number">0</span>], <span class="number">2</span>*x[<span class="number">1</span>]])
+
+x0 = np.array([<span class="number">5.0</span>, <span class="number">5.0</span>])
+x_min, history = gradient_descent(f, grad_f, x0, lr=<span class="number">0.1</span>)
+<span class="keyword">print</span>(<span class="string">f"Minimum found at: {x_min}"</span>)  <span class="comment"># ≈ [0, 0]</span>
+
+<span class="comment"># PyTorch automatic differentiation</span>
+<span class="keyword">import</span> torch
+
+x = torch.tensor([<span class="number">5.0</span>, <span class="number">5.0</span>], requires_grad=<span class="keyword">True</span>)
+loss = x[<span class="number">0</span>]**<span class="number">2</span> + x[<span class="number">1</span>]**<span class="number">2</span>
+loss.backward()  <span class="comment"># Computes gradients automatically!</span>
+<span class="keyword">print</span>(x.grad)    <span class="comment"># tensor([10., 10.]) = [2*5, 2*5]</span></pre>
+            </div>
+        </div>
+
+        <div class="source-box">
+            <h4>📖 Deep Dive Resources</h4>
+            <ul>
+                <li><a href="https://www.deeplearningbook.org/contents/numerical.html" target="_blank">Deep Learning
+                        Book - Numerical Computation</a></li>
+                <li><a href="https://cs231n.github.io/optimization-1/" target="_blank">Stanford CS231n -
+                        Optimization</a></li>
+                <li><a href="https://distill.pub/2017/momentum/" target="_blank">Distill - Why Momentum Really Works</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 5: Multivariable Calculus -->
+    <section class="section" id="multivariable">
+        <div class="section-header">
+            <span class="section-tag">Section 05</span>
+            <h2>Multivariable <span>Calculus</span></h2>
+            <p class="section-desc">Real ML uses functions of many variables. Partial derivatives and gradients are
+                essential.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">∂</div>
+                <h3>Partial Derivatives</h3>
+                <p>Differentiate with respect to one variable, holding others constant.</p>
+                <ul>
+                    <li>∂f/∂x: derivative holding y constant</li>
+                    <li>Measures rate of change in x direction</li>
+                    <li>Same rules as single variable</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">∇</div>
+                <h3>The Gradient</h3>
+                <p>Vector of all partial derivatives.</p>
+                <ul>
+                    <li>∇f = [∂f/∂x₁, ∂f/∂x₂, ..., ∂f/∂xₙ]</li>
+                    <li>Points in direction of steepest ascent</li>
+                    <li>Magnitude = rate of steepest increase</li>
+                    <li>Essential for gradient descent</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">H</div>
+                <h3>The Hessian</h3>
+                <p>Matrix of second derivatives.</p>
+                <ul>
+                    <li>Hᵢⱼ = ∂²f/∂xᵢ∂xⱼ</li>
+                    <li>Describes curvature</li>
+                    <li>Used in Newton's method</li>
+                    <li>Eigenvalues → convexity</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="math-box">
+            <div class="math-label">The Gradient Vector</div>
+            <div class="math-formula">
+                ∇f = (∂f/∂x₁, ∂f/∂x₂, ..., ∂f/∂xₙ)
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">multivariable.py</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> torch
+
+<span class="comment"># Partial derivatives example: f(x,y) = x²y + y³</span>
+<span class="comment"># ∂f/∂x = 2xy</span>
+<span class="comment"># ∂f/∂y = x² + 3y²</span>
+
+<span class="keyword">def</span> <span class="function">partial_x</span>(x, y): <span class="keyword">return</span> <span class="number">2</span>*x*y
+<span class="keyword">def</span> <span class="function">partial_y</span>(x, y): <span class="keyword">return</span> x**<span class="number">2</span> + <span class="number">3</span>*y**<span class="number">2</span>
+<span class="keyword">def</span> <span class="function">gradient</span>(x, y): <span class="keyword">return</span> np.array([partial_x(x,y), partial_y(x,y)])
+
+<span class="comment"># PyTorch autograd handles this automatically</span>
+x = torch.tensor(<span class="number">2.0</span>, requires_grad=<span class="keyword">True</span>)
+y = torch.tensor(<span class="number">3.0</span>, requires_grad=<span class="keyword">True</span>)
+f = x**<span class="number">2</span> * y + y**<span class="number">3</span>
+f.backward()
+
+<span class="keyword">print</span>(<span class="string">f"∂f/∂x = {x.grad}"</span>)  <span class="comment"># 12 = 2*2*3</span>
+<span class="keyword">print</span>(<span class="string">f"∂f/∂y = {y.grad}"</span>)  <span class="comment"># 31 = 4 + 27</span>
+
+<span class="comment"># Jacobian: for vector-valued functions</span>
+<span class="comment"># Hessian: second derivative matrix</span>
+<span class="keyword">from</span> torch.autograd.functional <span class="keyword">import</span> hessian
+f_scalar = <span class="keyword">lambda</span> xy: xy[<span class="number">0</span>]**<span class="number">2</span> * xy[<span class="number">1</span>] + xy[<span class="number">1</span>]**<span class="number">3</span>
+H = hessian(f_scalar, torch.tensor([<span class="number">2.0</span>, <span class="number">3.0</span>]))</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Roadmap -->
+    <section class="section" id="roadmap">
+        <div class="section-header">
+            <span class="section-tag">🎯 Learning Path</span>
+            <h2>Your <span>Calculus Journey</span></h2>
+        </div>
+
+        <div class="learning-path">
+            <div class="path-line"></div>
+
+            <div class="path-item">
+                <div class="path-marker">1</div>
+                <div class="path-content">
+                    <h4>Week 1-2: Limits & Continuity</h4>
+                    <p>Master the concept of limits, evaluate limits, understand continuity.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">2</div>
+                <div class="path-content">
+                    <h4>Week 3-4: Derivatives</h4>
+                    <p>Definition, rules (power, product, quotient, chain), applications.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">3</div>
+                <div class="path-content">
+                    <h4>Week 5-6: Integration</h4>
+                    <p>Antiderivatives, definite integrals, fundamental theorem, techniques.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">4</div>
+                <div class="path-content">
+                    <h4>Week 7-8: Multivariable</h4>
+                    <p>Partial derivatives, gradients, Jacobians, Hessians.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">5</div>
+                <div class="path-content">
+                    <h4>Week 9+: ML Applications</h4>
+                    <p>Gradient descent, backpropagation, optimization algorithms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Built with 🧡 for learners | Master calculus, master optimization</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">
+            "Calculus is the language of change - and machine learning is all about changing models to fit data."
+        </p>
+    </footer>
+
+    <script src="calculus.js"></script>
+
+</body>
+
+</html>

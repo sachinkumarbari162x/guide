@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Development - Complete Learning Guide</title>
+    <link rel="stylesheet" href="app-development.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">📱 App Development</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#web">Web Apps</a></li>
+                <li><a href="#android">Android</a></li>
+                <li><a href="#ios">iOS</a></li>
+                <li><a href="#cross">Cross-Platform</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-badge">🚀 Build Apps for Every Platform</div>
+        <h1>Master <span class="gradient">App Development</span></h1>
+        <p class="hero-subtitle">
+            Learn to build web apps, Android apps, and iOS apps. From frameworks to deployment, create production-ready
+            applications.
+        </p>
+
+        <div class="platform-cards">
+            <div class="platform-card web">
+                <div class="icon">🌐</div>
+                <h4>Web Apps</h4>
+                <p>React, Vue, Angular</p>
+            </div>
+            <div class="platform-card android">
+                <div class="icon">🤖</div>
+                <h4>Android</h4>
+                <p>Kotlin, Jetpack</p>
+            </div>
+            <div class="platform-card ios">
+                <div class="icon">🍎</div>
+                <h4>iOS</h4>
+                <p>Swift, SwiftUI</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Web Apps -->
+    <section class="section" id="web">
+        <div class="section-header">
+            <span class="section-tag web">Section 01</span>
+            <h2><span class="web">Web Application</span> Development</h2>
+            <p class="section-desc">Build modern, responsive web applications using the latest frameworks and
+                technologies.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card web-card">
+                <div class="card-icon web">⚛️</div>
+                <h3>React</h3>
+                <p>Component-based UI library by Meta.</p>
+                <ul>
+                    <li>Virtual DOM for performance</li>
+                    <li>Hooks for state management</li>
+                    <li>Large ecosystem (Next.js, Redux)</li>
+                    <li>React Native for mobile</li>
+                </ul>
+            </div>
+            <div class="card web-card">
+                <div class="card-icon web">💚</div>
+                <h3>Vue.js</h3>
+                <p>Progressive JavaScript framework.</p>
+                <ul>
+                    <li>Beginner-friendly</li>
+                    <li>Single-file components</li>
+                    <li>Vuex for state, Vue Router</li>
+                    <li>Nuxt.js for SSR</li>
+                </ul>
+            </div>
+            <div class="card web-card">
+                <div class="card-icon web">🅰️</div>
+                <h3>Angular</h3>
+                <p>Full-featured framework by Google.</p>
+                <ul>
+                    <li>TypeScript-first</li>
+                    <li>Dependency injection</li>
+                    <li>RxJS for reactive programming</li>
+                    <li>Enterprise-grade tooling</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">App.tsx (React)</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> React, { useState, useEffect } <span class="keyword">from</span> <span class="string">'react'</span>;
+
+<span class="keyword">function</span> <span class="function">App</span>() {
+  <span class="keyword">const</span> [users, setUsers] = <span class="function">useState</span>([]);
+  <span class="keyword">const</span> [loading, setLoading] = <span class="function">useState</span>(<span class="keyword">true</span>);
+
+  <span class="function">useEffect</span>(() => {
+    <span class="function">fetch</span>(<span class="string">'/api/users'</span>)
+      .then(res => res.json())
+      .then(data => {
+        setUsers(data);
+        setLoading(<span class="keyword">false</span>);
+      });
+  }, []);
+
+  <span class="keyword">if</span> (loading) <span class="keyword">return</span> <span class="string">&lt;div&gt;Loading...&lt;/div&gt;</span>;
+
+  <span class="keyword">return</span> (
+    <span class="string">&lt;div className="app"&gt;</span>
+      <span class="string">&lt;h1&gt;</span>Users<span class="string">&lt;/h1&gt;</span>
+      {users.map(user => (
+        <span class="string">&lt;UserCard key={user.id} user={user} /&gt;</span>
+      ))}
+    <span class="string">&lt;/div&gt;</span>
+  );
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Android -->
+    <section class="section" id="android">
+        <div class="section-header">
+            <span class="section-tag android">Section 02</span>
+            <h2><span class="android">Android</span> Development</h2>
+            <p class="section-desc">Build native Android apps with Kotlin and Jetpack Compose.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card android-card">
+                <div class="card-icon android">📝</div>
+                <h3>Kotlin</h3>
+                <p>Modern language for Android.</p>
+                <ul>
+                    <li>Null safety built-in</li>
+                    <li>Coroutines for async</li>
+                    <li>Extension functions</li>
+                    <li>100% Java interop</li>
+                </ul>
+            </div>
+            <div class="card android-card">
+                <div class="card-icon android">🎨</div>
+                <h3>Jetpack Compose</h3>
+                <p>Declarative UI toolkit.</p>
+                <ul>
+                    <li>Compose functions = UI</li>
+                    <li>State-driven rendering</li>
+                    <li>Material Design 3</li>
+                    <li>Less boilerplate code</li>
+                </ul>
+            </div>
+            <div class="card android-card">
+                <div class="card-icon android">📦</div>
+                <h3>Android Jetpack</h3>
+                <p>Suite of libraries for Android.</p>
+                <ul>
+                    <li>Room for database</li>
+                    <li>ViewModel & LiveData</li>
+                    <li>Navigation component</li>
+                    <li>WorkManager for background</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">MainActivity.kt (Compose)</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">@Composable</span>
+<span class="keyword">fun</span> <span class="function">UserListScreen</span>(viewModel: UserViewModel = viewModel()) {
+    <span class="keyword">val</span> users <span class="keyword">by</span> viewModel.users.collectAsState()
+    <span class="keyword">val</span> isLoading <span class="keyword">by</span> viewModel.isLoading.collectAsState()
+    
+    <span class="function">Scaffold</span>(
+        topBar = { <span class="function">TopAppBar</span>(title = { <span class="function">Text</span>(<span class="string">"Users"</span>) }) }
+    ) { padding ->
+        <span class="keyword">if</span> (isLoading) {
+            <span class="function">CircularProgressIndicator</span>(
+                modifier = Modifier.fillMaxSize().wrapContentSize()
+            )
+        } <span class="keyword">else</span> {
+            <span class="function">LazyColumn</span>(contentPadding = padding) {
+                <span class="function">items</span>(users) { user ->
+                    <span class="function">UserCard</span>(user = user)
+                }
+            }
+        }
+    }
+}</pre>
+            </div>
+        </div>
+
+        <div class="source-box">
+            <h4>📖 Android Learning Resources</h4>
+            <ul>
+                <li><a href="https://developer.android.com/courses" target="_blank">Android Developer Courses</a></li>
+                <li><a href="https://developer.android.com/jetpack/compose" target="_blank">Jetpack Compose
+                        Documentation</a></li>
+                <li><a href="https://kotlinlang.org/docs/home.html" target="_blank">Kotlin Language Documentation</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 3: iOS -->
+    <section class="section" id="ios">
+        <div class="section-header">
+            <span class="section-tag ios">Section 03</span>
+            <h2><span class="ios">iOS</span> Development</h2>
+            <p class="section-desc">Build native iOS apps with Swift and SwiftUI.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card ios-card">
+                <div class="card-icon ios">🔷</div>
+                <h3>Swift</h3>
+                <p>Apple's modern programming language.</p>
+                <ul>
+                    <li>Type safety and inference</li>
+                    <li>Optionals for null handling</li>
+                    <li>Protocol-oriented design</li>
+                    <li>Swift concurrency (async/await)</li>
+                </ul>
+            </div>
+            <div class="card ios-card">
+                <div class="card-icon ios">🎨</div>
+                <h3>SwiftUI</h3>
+                <p>Declarative UI framework.</p>
+                <ul>
+                    <li>@State, @Binding, @ObservedObject</li>
+                    <li>Live previews in Xcode</li>
+                    <li>Cross-Apple platform support</li>
+                    <li>Animations built-in</li>
+                </ul>
+            </div>
+            <div class="card ios-card">
+                <div class="card-icon ios">📦</div>
+                <h3>Apple Frameworks</h3>
+                <p>Rich ecosystem of APIs.</p>
+                <ul>
+                    <li>Core Data for persistence</li>
+                    <li>Combine for reactive code</li>
+                    <li>HealthKit, ARKit, MapKit</li>
+                    <li>App Intents & Shortcuts</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">ContentView.swift (SwiftUI)</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="keyword">import</span> SwiftUI
+
+<span class="keyword">struct</span> <span class="type">UserListView</span>: View {
+    <span class="decorator">@StateObject</span> <span class="keyword">private var</span> viewModel = UserViewModel()
+    
+    <span class="keyword">var</span> body: <span class="keyword">some</span> View {
+        NavigationStack {
+            Group {
+                <span class="keyword">if</span> viewModel.isLoading {
+                    ProgressView(<span class="string">"Loading..."</span>)
+                } <span class="keyword">else</span> {
+                    List(viewModel.users) { user <span class="keyword">in</span>
+                        UserRow(user: user)
+                    }
+                }
+            }
+            .navigationTitle(<span class="string">"Users"</span>)
+            .task {
+                <span class="keyword">await</span> viewModel.fetchUsers()
+            }
+        }
+    }
+}</pre>
+            </div>
+        </div>
+
+        <div class="source-box">
+            <h4>📖 iOS Learning Resources</h4>
+            <ul>
+                <li><a href="https://developer.apple.com/tutorials/swiftui" target="_blank">SwiftUI Tutorials by
+                        Apple</a></li>
+                <li><a href="https://docs.swift.org/swift-book/" target="_blank">The Swift Programming Language</a></li>
+                <li><a href="https://www.hackingwithswift.com/" target="_blank">Hacking with Swift (Free Tutorials)</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 4: Cross-Platform -->
+    <section class="section" id="cross">
+        <div class="section-header">
+            <span class="section-tag cross">Section 04</span>
+            <h2><span class="cross">Cross-Platform</span> Development</h2>
+            <p class="section-desc">Write once, deploy everywhere with cross-platform frameworks.</p>
+        </div>
+
+        <!-- Framework Comparison -->
+        <div class="app-demo">
+            <div class="app-demo-header">
+                <span class="app-demo-title">🎮 Framework Comparison</span>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button class="btn btn-secondary framework-btn active" data-framework="react">React</button>
+                    <button class="btn btn-secondary framework-btn" data-framework="flutter">Flutter</button>
+                    <button class="btn btn-secondary framework-btn" data-framework="kotlin">Kotlin</button>
+                    <button class="btn btn-secondary framework-btn" data-framework="swift">Swift</button>
+                </div>
+            </div>
+            <div id="framework-output"></div>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon" style="background: rgba(59, 130, 246, 0.15);">🦋</div>
+                <h3>Flutter</h3>
+                <p>Google's UI toolkit for any platform.</p>
+                <ul>
+                    <li>Single codebase for mobile, web, desktop</li>
+                    <li>Dart programming language</li>
+                    <li>Hot reload for fast development</li>
+                    <li>Rich widget library</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background: rgba(59, 130, 246, 0.15);">⚛️</div>
+                <h3>React Native</h3>
+                <p>Build mobile apps with React.</p>
+                <ul>
+                    <li>JavaScript/TypeScript</li>
+                    <li>Native components</li>
+                    <li>Large ecosystem</li>
+                    <li>Code sharing with web</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background: rgba(168, 85, 247, 0.15);">💜</div>
+                <h3>Kotlin Multiplatform</h3>
+                <p>Share Kotlin code across platforms.</p>
+                <ul>
+                    <li>Share business logic</li>
+                    <li>Native UI per platform</li>
+                    <li>Compose Multiplatform</li>
+                    <li>JetBrains backed</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Architecture -->
+    <section class="section" id="architecture">
+        <div class="section-header">
+            <span class="section-tag cross">Section 05</span>
+            <h2>App <span class="cross">Architecture</span></h2>
+            <p class="section-desc">Patterns and best practices for building scalable applications.</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="tab-patterns">Patterns</button>
+                <button class="tab-btn" data-tab="tab-state">State Management</button>
+                <button class="tab-btn" data-tab="tab-testing">Testing</button>
+            </div>
+
+            <div class="tab-panel active" id="tab-patterns">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>MVC / MVP / MVVM</h3>
+                        <p>Separation of concerns patterns.</p>
+                        <ul>
+                            <li><strong>MVC:</strong> Model-View-Controller</li>
+                            <li><strong>MVP:</strong> Model-View-Presenter</li>
+                            <li><strong>MVVM:</strong> Model-View-ViewModel</li>
+                            <li>Choose based on platform</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Clean Architecture</h3>
+                        <p>Dependency rule & layers.</p>
+                        <ul>
+                            <li>Domain layer (use cases)</li>
+                            <li>Data layer (repositories)</li>
+                            <li>Presentation layer (UI)</li>
+                            <li>Testable and maintainable</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Unidirectional Data Flow</h3>
+                        <p>Predictable state updates.</p>
+                        <ul>
+                            <li>Actions trigger changes</li>
+                            <li>State flows down</li>
+                            <li>Events flow up</li>
+                            <li>Redux, MVI patterns</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-state">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Local State</h3>
+                        <ul>
+                            <li>React: useState, useReducer</li>
+                            <li>SwiftUI: @State, @Binding</li>
+                            <li>Compose: remember { mutableStateOf() }</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Global State</h3>
+                        <ul>
+                            <li>React: Redux, Zustand, Context</li>
+                            <li>Flutter: Riverpod, Provider</li>
+                            <li>Android: ViewModel + StateFlow</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Server State</h3>
+                        <ul>
+                            <li>React Query / TanStack Query</li>
+                            <li>SWR for data fetching</li>
+                            <li>Apollo Client for GraphQL</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-testing">
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Unit Testing</h3>
+                        <ul>
+                            <li>Jest (JavaScript)</li>
+                            <li>XCTest (Swift)</li>
+                            <li>JUnit (Kotlin)</li>
+                            <li>Test business logic</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>UI Testing</h3>
+                        <ul>
+                            <li>React Testing Library</li>
+                            <li>XCUITest (iOS)</li>
+                            <li>Espresso (Android)</li>
+                            <li>Cypress (E2E)</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Snapshot Testing</h3>
+                        <ul>
+                            <li>Capture UI state</li>
+                            <li>Detect visual regressions</li>
+                            <li>Storybook for components</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Preview Demo -->
+        <div class="app-demo">
+            <div class="app-demo-header">
+                <span class="app-demo-title">🎮 Interactive: App Screen Preview</span>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary preview-btn active" data-screen="home">Home</button>
+                    <button class="btn btn-secondary preview-btn" data-screen="profile">Profile</button>
+                    <button class="btn btn-secondary preview-btn" data-screen="settings">Settings</button>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center; padding: 2rem 0;">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="phone-notch"></div>
+                        <div class="phone-content" id="app-preview-screen"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Component Builder -->
+        <div class="app-demo">
+            <div class="app-demo-header">
+                <span class="app-demo-title">🔧 Component Builder Demo</span>
+                <button class="btn btn-primary" id="build-component">Build Component</button>
+            </div>
+            <div id="component-output"
+                style="background: #0a0d12; border-radius: 8px; padding: 1.5rem; min-height: 150px;">
+                <div style="color: #5a6778;">Click "Build Component" to see the component creation process...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Path -->
+    <section class="section" id="roadmap">
+        <div class="section-header">
+            <span class="section-tag cross">🎯 Learning Path</span>
+            <h2>Your App Development <span class="cross">Journey</span></h2>
+        </div>
+
+        <div class="learning-path">
+            <div class="path-line"></div>
+
+            <div class="path-item">
+                <div class="path-marker">1</div>
+                <div class="path-content">
+                    <h4>Week 1-2: Fundamentals</h4>
+                    <p>HTML/CSS/JS basics, programming concepts, Git version control.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">2</div>
+                <div class="path-content">
+                    <h4>Week 3-4: Choose Your Path</h4>
+                    <p>Pick a platform: Web (React), Android (Kotlin), iOS (Swift), or Cross-platform (Flutter).</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">3</div>
+                <div class="path-content">
+                    <h4>Week 5-6: UI Development</h4>
+                    <p>Build layouts, handle user input, navigation, styling.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">4</div>
+                <div class="path-content">
+                    <h4>Week 7-8: Data & State</h4>
+                    <p>API integration, state management, local storage, databases.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">5</div>
+                <div class="path-content">
+                    <h4>Week 9+: Production Ready</h4>
+                    <p>Testing, performance, deployment, app store submission.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Built with 💜 for developers | Ship apps that users love</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">
+            "The best apps are the ones that solve real problems." - Every successful developer
+        </p>
+    </footer>
+
+    <script src="app-development.js"></script>
+
+</body>
+
+</html>

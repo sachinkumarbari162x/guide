@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Languages - Complete Learning Guide</title>
+    <link rel="stylesheet" href="programming.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">&lt;/&gt; Programming Guide</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#fundamentals">Fundamentals</a></li>
+                <li><a href="#paradigms">Paradigms</a></li>
+                <li><a href="#languages">Languages</a></li>
+                <li><a href="#concepts">Concepts</a></li>
+                <li><a href="#practice">Practice</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-badge">💻 Build Anything with Code</div>
+        <h1>Master <span class="gradient">Programming</span></h1>
+        <p class="hero-subtitle">
+            Understand programming languages from fundamentals to advanced concepts. Learn different paradigms, compare
+            languages, and build your coding foundation.
+        </p>
+
+        <div class="lang-icons">
+            <div class="lang-icon python" title="Python">🐍</div>
+            <div class="lang-icon javascript" title="JavaScript">JS</div>
+            <div class="lang-icon rust" title="Rust">🦀</div>
+            <div class="lang-icon go" title="Go">Go</div>
+            <div class="lang-icon cpp" title="C++">C++</div>
+        </div>
+    </section>
+
+    <!-- Section 1: Fundamentals -->
+    <section class="section" id="fundamentals">
+        <div class="section-header">
+            <span class="section-tag">Section 01</span>
+            <h2>Programming <span>Fundamentals</span></h2>
+            <p class="section-desc">Core concepts that every programmer must understand, regardless of language.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📦</div>
+                <h3>Variables & Data Types</h3>
+                <p>Storing and manipulating data.</p>
+                <ul>
+                    <li><strong>Primitives:</strong> int, float, bool, string</li>
+                    <li><strong>Collections:</strong> arrays, lists, maps</li>
+                    <li><strong>Type systems:</strong> static vs dynamic</li>
+                    <li>Memory allocation and scope</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔀</div>
+                <h3>Control Flow</h3>
+                <p>Directing program execution.</p>
+                <ul>
+                    <li><strong>Conditionals:</strong> if, else, switch</li>
+                    <li><strong>Loops:</strong> for, while, foreach</li>
+                    <li><strong>Branching:</strong> break, continue, return</li>
+                    <li>Pattern matching</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Functions</h3>
+                <p>Reusable blocks of code.</p>
+                <ul>
+                    <li>Parameters and return values</li>
+                    <li>Scope and closures</li>
+                    <li>Recursion</li>
+                    <li>Higher-order functions</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-title">fundamentals.js</span>
+            </div>
+            <div class="code-body">
+                <pre><span class="comment">// Variables and Types</span>
+<span class="keyword">let</span> name = <span class="string">"Alice"</span>;           <span class="comment">// String</span>
+<span class="keyword">const</span> age = <span class="number">25</span>;               <span class="comment">// Number (immutable)</span>
+<span class="keyword">let</span> isActive = <span class="keyword">true</span>;          <span class="comment">// Boolean</span>
+<span class="keyword">let</span> scores = [<span class="number">95</span>, <span class="number">87</span>, <span class="number">92</span>];    <span class="comment">// Array</span>
+
+<span class="comment">// Control Flow</span>
+<span class="keyword">if</span> (age >= <span class="number">18</span>) {
+  console.log(<span class="string">"Adult"</span>);
+} <span class="keyword">else</span> {
+  console.log(<span class="string">"Minor"</span>);
+}
+
+<span class="comment">// Loop</span>
+<span class="keyword">for</span> (<span class="keyword">let</span> score <span class="keyword">of</span> scores) {
+  console.log(<span class="string">`Score: ${score}`</span>);
+}
+
+<span class="comment">// Function</span>
+<span class="keyword">function</span> <span class="function">greet</span>(name) {
+  <span class="keyword">return</span> <span class="string">`Hello, ${name}!`</span>;
+}
+
+<span class="comment">// Arrow function (modern syntax)</span>
+<span class="keyword">const</span> <span class="function">add</span> = (a, b) => a + b;</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Paradigms -->
+    <section class="section" id="paradigms">
+        <div class="section-header">
+            <span class="section-tag">Section 02</span>
+            <h2>Programming <span>Paradigms</span></h2>
+            <p class="section-desc">Different approaches to structuring and thinking about code.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>Imperative</h3>
+                <p>Step-by-step instructions telling the computer what to do.</p>
+                <ul>
+                    <li>Direct manipulation of state</li>
+                    <li>Explicit control flow</li>
+                    <li>Languages: C, Go, Python</li>
+                </ul>
+                <div class="feature-tags">
+                    <span class="feature-tag rose">Mutable State</span>
+                    <span class="feature-tag">Procedural</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Object-Oriented (OOP)</h3>
+                <p>Organizing code around objects with data and behavior.</p>
+                <ul>
+                    <li>Encapsulation, inheritance, polymorphism</li>
+                    <li>Classes and interfaces</li>
+                    <li>Languages: Java, C++, Python</li>
+                </ul>
+                <div class="feature-tags">
+                    <span class="feature-tag violet">Classes</span>
+                    <span class="feature-tag violet">Inheritance</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">λ</div>
+                <h3>Functional</h3>
+                <p>Computation as evaluation of mathematical functions.</p>
+                <ul>
+                    <li>Immutability and pure functions</li>
+                    <li>Higher-order functions, map/reduce</li>
+                    <li>Languages: Haskell, Scala, Elixir</li>
+                </ul>
+                <div class="feature-tags">
+                    <span class="feature-tag cyan">Immutable</span>
+                    <span class="feature-tag cyan">Pure Functions</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paradigm Demo -->
+        <div class="playground">
+            <div class="playground-header">
+                <span class="playground-title">🎮 Interactive: Same Problem, Different Paradigms</span>
+                <div class="playground-controls">
+                    <button class="btn btn-primary" id="run-paradigm">Run Comparison</button>
+                </div>
+            </div>
+            <div id="paradigm-output"
+                style="background: #0a0a0f; border-radius: 8px; padding: 1.5rem; min-height: 250px;">
+                <div style="color: var(--text-muted);">Click "Run Comparison" to see how different paradigms solve the
+                    same problem...</div>
+            </div>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Paradigm</th>
+                    <th>Key Principle</th>
+                    <th>State Management</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Imperative</td>
+                    <td>How to do it</td>
+                    <td>Mutable</td>
+                    <td>System programming, scripts</td>
+                </tr>
+                <tr>
+                    <td>Object-Oriented</td>
+                    <td>Model real-world entities</td>
+                    <td>Encapsulated</td>
+                    <td>Large applications, UI</td>
+                </tr>
+                <tr>
+                    <td>Functional</td>
+                    <td>What to compute</td>
+                    <td>Immutable</td>
+                    <td>Data processing, concurrency</td>
+                </tr>
+                <tr>
+                    <td>Declarative</td>
+                    <td>Describe the result</td>
+                    <td>Managed</td>
+                    <td>Databases, config, UI (React)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Section 3: Language Comparison -->
+    <section class="section" id="languages">
+        <div class="section-header">
+            <span class="section-tag">Section 03</span>
+            <h2>Language <span>Comparison</span></h2>
+            <p class="section-desc">Compare how different languages approach the same problems.</p>
+        </div>
+
+        <div class="playground">
+            <div class="playground-header">
+                <span class="playground-title">🎮 Interactive: Same Code, Different Languages</span>
+                <div class="playground-controls">
+                    <button class="btn btn-secondary lang-compare-btn active" data-lang="python">Python</button>
+                    <button class="btn btn-secondary lang-compare-btn" data-lang="javascript">JavaScript</button>
+                    <button class="btn btn-secondary lang-compare-btn" data-lang="rust">Rust</button>
+                    <button class="btn btn-secondary lang-compare-btn" data-lang="go">Go</button>
+                </div>
+            </div>
+            <div id="lang-code-display"></div>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🐍</div>
+                <h3>Python</h3>
+                <p>Simple, readable, versatile.</p>
+                <ul>
+                    <li><strong>Typing:</strong> Dynamic, duck-typed</li>
+                    <li><strong>Uses:</strong> ML, web, scripting, data science</li>
+                    <li><strong>Speed:</strong> Slower (interpreted)</li>
+                    <li><strong>Learning:</strong> Beginner-friendly</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🦀</div>
+                <h3>Rust</h3>
+                <p>Safe, fast, systems programming.</p>
+                <ul>
+                    <li><strong>Typing:</strong> Static, ownership system</li>
+                    <li><strong>Uses:</strong> Systems, WebAssembly, CLI</li>
+                    <li><strong>Speed:</strong> Very fast (compiled)</li>
+                    <li><strong>Learning:</strong> Steep curve, high reward</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Go</h3>
+                <p>Simple, concurrent, efficient.</p>
+                <ul>
+                    <li><strong>Typing:</strong> Static, simple type system</li>
+                    <li><strong>Uses:</strong> Cloud, DevOps, microservices</li>
+                    <li><strong>Speed:</strong> Fast (compiled), great GC</li>
+                    <li><strong>Learning:</strong> Easy to learn</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="source-box">
+            <h4>📖 Language Learning Resources</h4>
+            <ul>
+                <li><a href="https://docs.python.org/3/tutorial/" target="_blank">Python Official Tutorial</a></li>
+                <li><a href="https://javascript.info/" target="_blank">The Modern JavaScript Tutorial</a></li>
+                <li><a href="https://doc.rust-lang.org/book/" target="_blank">The Rust Programming Language Book</a>
+                </li>
+                <li><a href="https://go.dev/tour/" target="_blank">A Tour of Go</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 4: Core Concepts -->
+    <section class="section" id="concepts">
+        <div class="section-header">
+            <span class="section-tag">Section 04</span>
+            <h2>Core <span>Concepts</span></h2>
+            <p class="section-desc">Advanced concepts that separate beginners from professionals.</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="tab-memory">Memory</button>
+                <button class="tab-btn" data-tab="tab-concurrency">Concurrency</button>
+                <button class="tab-btn" data-tab="tab-types">Type Systems</button>
+                <button class="tab-btn" data-tab="tab-errors">Error Handling</button>
+            </div>
+
+            <div class="tab-panel active" id="tab-memory">
+                <h3 style="margin-bottom: 1rem;">Memory Management</h3>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Stack vs Heap</h3>
+                        <ul>
+                            <li><strong>Stack:</strong> Fast, automatic, fixed-size (locals)</li>
+                            <li><strong>Heap:</strong> Dynamic, manual/GC, flexible</li>
+                            <li>Stack frames for function calls</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Garbage Collection</h3>
+                        <ul>
+                            <li>Automatic memory reclamation</li>
+                            <li>Trade-off: convenience vs control</li>
+                            <li>Languages: Java, Go, Python, JS</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Manual Management</h3>
+                        <ul>
+                            <li>Explicit allocation/deallocation</li>
+                            <li>Maximum control and performance</li>
+                            <li>Languages: C, C++, Rust (ownership)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-concurrency">
+                <h3 style="margin-bottom: 1rem;">Concurrency & Parallelism</h3>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Threads</h3>
+                        <ul>
+                            <li>OS-level concurrency</li>
+                            <li>Shared memory, locks needed</li>
+                            <li>Race conditions, deadlocks</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Async/Await</h3>
+                        <ul>
+                            <li>Cooperative multitasking</li>
+                            <li>Single-threaded concurrency</li>
+                            <li>Great for I/O-bound tasks</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Actors/Channels</h3>
+                        <ul>
+                            <li>Message-passing model</li>
+                            <li>No shared state</li>
+                            <li>Go channels, Erlang actors</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-types">
+                <h3 style="margin-bottom: 1rem;">Type Systems</h3>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Static Typing</h3>
+                        <ul>
+                            <li>Types checked at compile time</li>
+                            <li>Catch errors early</li>
+                            <li>Java, C++, Rust, Go, TypeScript</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Dynamic Typing</h3>
+                        <ul>
+                            <li>Types checked at runtime</li>
+                            <li>More flexible, faster development</li>
+                            <li>Python, JavaScript, Ruby</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Type Inference</h3>
+                        <ul>
+                            <li>Compiler deduces types</li>
+                            <li>Static safety, less boilerplate</li>
+                            <li>Rust, Kotlin, TypeScript</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="tab-errors">
+                <h3 style="margin-bottom: 1rem;">Error Handling</h3>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Exceptions</h3>
+                        <ul>
+                            <li>Try/catch blocks</li>
+                            <li>Stack unwinding</li>
+                            <li>Python, Java, JavaScript</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Result Types</h3>
+                        <ul>
+                            <li>Errors as values</li>
+                            <li>Explicit handling required</li>
+                            <li>Rust Result, Go errors</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Optional/Maybe</h3>
+                        <ul>
+                            <li>Handle absence of values</li>
+                            <li>No null pointer exceptions</li>
+                            <li>Rust Option, Swift Optional</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Practice -->
+    <section class="section" id="practice">
+        <div class="section-header">
+            <span class="section-tag">Section 05</span>
+            <h2>Interactive <span>Playground</span></h2>
+            <p class="section-desc">Write and run code directly in your browser.</p>
+        </div>
+
+        <div class="playground">
+            <div class="playground-header">
+                <span class="playground-title">🎮 JavaScript Code Playground</span>
+                <div class="playground-controls">
+                    <button class="btn btn-secondary sample-btn active" data-sample="hello">Hello World</button>
+                    <button class="btn btn-secondary sample-btn" data-sample="variables">Variables</button>
+                    <button class="btn btn-secondary sample-btn" data-sample="functions">Functions</button>
+                    <button class="btn btn-secondary sample-btn" data-sample="objects">Objects</button>
+                    <button class="btn btn-secondary sample-btn" data-sample="async">Async</button>
+                </div>
+            </div>
+            <textarea class="code-editor" id="code-editor">// Hello World in JavaScript
+console.log("Hello, World!");
+console.log("Welcome to programming!");</textarea>
+            <button class="btn btn-primary" id="run-code" style="margin-top: 1rem;">▶ Run Code</button>
+            <div class="output-panel" id="code-output">
+                <div class="output-label">> Output:</div>
+                <div style="color: var(--text-muted);">Click "Run Code" to see the output...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Path -->
+    <section class="section" id="roadmap">
+        <div class="section-header">
+            <span class="section-tag">🎯 Learning Path</span>
+            <h2>Your <span>Programming Journey</span></h2>
+        </div>
+
+        <div class="learning-path">
+            <div class="path-line"></div>
+
+            <div class="path-item">
+                <div class="path-marker">1</div>
+                <div class="path-content">
+                    <h4>Week 1-2: Basics</h4>
+                    <p>Variables, data types, operators, control flow. Pick one language (Python recommended).</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">2</div>
+                <div class="path-content">
+                    <h4>Week 3-4: Functions & Data Structures</h4>
+                    <p>Functions, arrays, objects/dictionaries, basic algorithms.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">3</div>
+                <div class="path-content">
+                    <h4>Week 5-6: OOP & Modules</h4>
+                    <p>Classes, inheritance, modules, packages, project structure.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">4</div>
+                <div class="path-content">
+                    <h4>Week 7-8: Advanced Concepts</h4>
+                    <p>Error handling, file I/O, testing, debugging.</p>
+                </div>
+            </div>
+
+            <div class="path-item">
+                <div class="path-marker">5</div>
+                <div class="path-content">
+                    <h4>Week 9+: Specialize</h4>
+                    <p>Web dev, data science, systems programming - pick your path!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="source-box">
+            <h4>📖 Practice Resources</h4>
+            <ul>
+                <li><a href="https://leetcode.com/" target="_blank">LeetCode</a> - Algorithm practice</li>
+                <li><a href="https://www.hackerrank.com/" target="_blank">HackerRank</a> - Skill certification</li>
+                <li><a href="https://exercism.org/" target="_blank">Exercism</a> - Mentor-guided learning</li>
+                <li><a href="https://projecteuler.net/" target="_blank">Project Euler</a> - Math + programming</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Built with 💚 for learners | Code is the new literacy</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">
+            "Any fool can write code that a computer can understand. Good programmers write code that humans can
+            understand." - Martin Fowler
+        </p>
+    </footer>
+
+    <script src="programming.js"></script>
+
+</body>
+
+</html>
