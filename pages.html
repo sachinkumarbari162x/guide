@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Guides - All Pages</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a25;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #06b6d4;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(99, 102, 241, 0.2);
+            --glow: 0 0 40px rgba(99, 102, 241, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 70%);
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            25% {
+                transform: translateY(-30px) translateX(20px);
+            }
+
+            50% {
+                transform: translateY(-10px) translateX(-20px);
+            }
+
+            75% {
+                transform: translateY(-40px) translateX(10px);
+            }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            animation: glow-text 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-text {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.7));
+            }
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Home Button */
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow);
+        }
+
+        /* Main Grid */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px 60px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2px;
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        /* Card Styling */
+        .guide-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .guide-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--card-accent, var(--accent-primary)), var(--card-accent-end, var(--accent-secondary)));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--card-accent, var(--accent-primary));
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .guide-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+
+        .card-arrow {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            width: 40px;
+            height: 40px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .guide-card:hover .card-arrow {
+            background: var(--accent-primary);
+            transform: translateX(5px);
+        }
+
+        /* Color Variants */
+        .guide-card.math {
+            --card-accent: #f472b6;
+            --card-accent-end: #ec4899;
+        }
+
+        .guide-card.code {
+            --card-accent: #22c55e;
+            --card-accent-end: #10b981;
+        }
+
+        .guide-card.security {
+            --card-accent: #ef4444;
+            --card-accent-end: #dc2626;
+        }
+
+        .guide-card.ai {
+            --card-accent: #8b5cf6;
+            --card-accent-end: #7c3aed;
+        }
+
+        .guide-card.data {
+            --card-accent: #06b6d4;
+            --card-accent-end: #0891b2;
+        }
+
+        .guide-card.systems {
+            --card-accent: #f59e0b;
+            --card-accent-end: #d97706;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            .guides-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .home-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <a href="index.html" class="home-btn">🏠 Home</a>
+
+    <header>
+        <h1 class="logo">📚 Learning Guides</h1>
+        <p>Comprehensive, interactive guides covering mathematics, programming, security, and AI. Click any card to
+            start learning!</p>
+    </header>
+
+    <main>
+        <h2 class="section-title">Mathematics & Theory</h2>
+        <div class="guides-grid">
+            <a href="linear-algebra.html" class="guide-card math">
+                <span class="card-icon">📐</span>
+                <h3 class="card-title">Linear Algebra</h3>
+                <p class="card-desc">Vectors, matrices, eigenvalues, SVD, and transformations - the backbone of machine
+                    learning.</p>
+                <div class="card-tags">
+                    <span class="tag">Vectors</span>
+                    <span class="tag">Matrices</span>
+                    <span class="tag">SVD</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="calculus.html" class="guide-card math">
+                <span class="card-icon">∫</span>
+                <h3 class="card-title">Calculus</h3>
+                <p class="card-desc">Derivatives, integrals, gradients, and optimization - essential for understanding
+                    neural networks.</p>
+                <div class="card-tags">
+                    <span class="tag">Derivatives</span>
+                    <span class="tag">Gradients</span>
+                    <span class="tag">Optimization</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="probability.html" class="guide-card math">
+                <span class="card-icon">📊</span>
+                <h3 class="card-title">Probability & Statistics</h3>
+                <p class="card-desc">Distributions, Bayes theorem, MLE, and sampling methods for probabilistic AI
+                    models.</p>
+                <div class="card-tags">
+                    <span class="tag">Bayes</span>
+                    <span class="tag">Distributions</span>
+                    <span class="tag">MLE</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Programming & Systems</h2>
+        <div class="guides-grid">
+            <a href="programming.html" class="guide-card code">
+                <span class="card-icon">💻</span>
+                <h3 class="card-title">Programming Fundamentals</h3>
+                <p class="card-desc">Core programming concepts, data structures, algorithms, and best practices.</p>
+                <div class="card-tags">
+                    <span class="tag">Algorithms</span>
+                    <span class="tag">Data Structures</span>
+                    <span class="tag">OOP</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="computer-systems.html" class="guide-card systems">
+                <span class="card-icon">🖥️</span>
+                <h3 class="card-title">Computer Systems</h3>
+                <p class="card-desc">Low-level computing concepts, memory, CPU architecture, and operating systems.</p>
+                <div class="card-tags">
+                    <span class="tag">CPU</span>
+                    <span class="tag">Memory</span>
+                    <span class="tag">OS</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="app-development.html" class="guide-card code">
+                <span class="card-icon">📱</span>
+                <h3 class="card-title">App Development</h3>
+                <p class="card-desc">Web, Android, and iOS app development frameworks and best practices.</p>
+                <div class="card-tags">
+                    <span class="tag">Web</span>
+                    <span class="tag">Mobile</span>
+                    <span class="tag">Frameworks</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Security & Safety</h2>
+        <div class="guides-grid">
+            <a href="security-guide.html" class="guide-card security">
+                <span class="card-icon">🔒</span>
+                <h3 class="card-title">Security Guide</h3>
+                <p class="card-desc">Web security, OWASP, XSS, CSRF, SQL injection, and defensive programming.</p>
+                <div class="card-tags">
+                    <span class="tag">OWASP</span>
+                    <span class="tag">XSS</span>
+                    <span class="tag">Encryption</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="ai-security.html" class="guide-card security">
+                <span class="card-icon">🛡️</span>
+                <h3 class="card-title">AI Security</h3>
+                <p class="card-desc">Adversarial attacks, model security, prompt injection, and AI safety principles.
+                </p>
+                <div class="card-tags">
+                    <span class="tag">Adversarial</span>
+                    <span class="tag">Prompt Injection</span>
+                    <span class="tag">Safety</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+        </div>
+
+        <h2 class="section-title">AI & Machine Learning</h2>
+        <div class="guides-grid">
+            <a href="index.html" class="guide-card ai">
+                <span class="card-icon">🧠</span>
+                <h3 class="card-title">Building LLMs from Scratch</h3>
+                <p class="card-desc">Complete roadmap from math foundations to transformer architecture and RLHF.</p>
+                <div class="card-tags">
+                    <span class="tag">Transformers</span>
+                    <span class="tag">Attention</span>
+                    <span class="tag">RLHF</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="llm-3d-models.html" class="guide-card ai">
+                <span class="card-icon">🎨</span>
+                <h3 class="card-title">LLM 3D Models</h3>
+                <p class="card-desc">3D visualization and understanding of large language model architectures.</p>
+                <div class="card-tags">
+                    <span class="tag">3D</span>
+                    <span class="tag">Visualization</span>
+                    <span class="tag">Architecture</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+
+            <a href="data-engineering.html" class="guide-card data">
+                <span class="card-icon">⚙️</span>
+                <h3 class="card-title">Data Engineering</h3>
+                <p class="card-desc">Data pipelines, ETL processes, databases, and big data architectures.</p>
+                <div class="card-tags">
+                    <span class="tag">Pipelines</span>
+                    <span class="tag">ETL</span>
+                    <span class="tag">Big Data</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Special Guides</h2>
+        <div class="guides-grid">
+            <a href="fast-delivery.html" class="guide-card systems">
+                <span class="card-icon">🚀</span>
+                <h3 class="card-title">Fast Delivery</h3>
+                <p class="card-desc">CI/CD, deployment strategies, DevOps practices, and rapid iteration techniques.</p>
+                <div class="card-tags">
+                    <span class="tag">CI/CD</span>
+                    <span class="tag">DevOps</span>
+                    <span class="tag">Deployment</span>
+                </div>
+                <div class="card-arrow">→</div>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Built with 💜 | <a href="https://github.com/sachinkumarbari162x/guide" target="_blank">View on GitHub</a></p>
+    </footer>
+
+    <script>
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+
+</html>
